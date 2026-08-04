@@ -1,11 +1,11 @@
 [
   {
     "route": "/",
-    "firstLoadUncompressedJsBytes": 840864,
+    "firstLoadUncompressedJsBytes": 841316,
     "firstLoadChunkPaths": [
-      ".next\\static\\chunks\\007wtknziclua.js",
+      ".next\\static\\chunks\\3s2vh4pxcpu4v.js",
       ".next\\static\\chunks\\14mumt5_n0xhi.js",
-      ".next\\static\\chunks\\08u581wezqoev.js",
+      ".next\\static\\chunks\\1efofl5zht_qg.js",
       ".next\\static\\chunks\\381jnnoau_l0e.js",
       ".next\\static\\chunks\\0cbr67yte101v.js",
       ".next\\static\\chunks\\0iec5q4ack_04.js",
@@ -14,9 +14,9 @@
   },
   {
     "route": "/_not-found",
-    "firstLoadUncompressedJsBytes": 514978,
+    "firstLoadUncompressedJsBytes": 514826,
     "firstLoadChunkPaths": [
-      ".next\\static\\chunks\\007wtknziclua.js",
+      ".next\\static\\chunks\\3s2vh4pxcpu4v.js",
       ".next\\static\\chunks\\14mumt5_n0xhi.js",
       ".next\\static\\chunks\\381jnnoau_l0e.js",
       ".next\\static\\chunks\\0cbr67yte101v.js",

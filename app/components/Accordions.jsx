@@ -5,8 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const FAQ_ITEMS = [
   {
-    question: "[SYS_SPEC] What is the architecture of ShaswatHub?",
-    answer: "ShaswatHub is built as a static client-side console shell using Next.js, with GSAP-driven scroll reveals, Lenis smooth-scroll, and Framer Motion micro-interactions layered on a minimal, bordered-grid design system."
+    question: "[SYS_SPEC] What is the architecture of ShaswatShell?",
+    answer: "ShaswatShell is built as a static client-side console shell using Next.js, with GSAP-driven scroll reveals, Lenis smooth-scroll, and Framer Motion micro-interactions layered on a minimal, bordered-grid design system."
   },
   {
     question: "[PERF_SPEC] How is high performance (60 FPS) guaranteed?",

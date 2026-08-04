@@ -121,7 +121,7 @@ function Preloader({ onComplete }) {
 
           {/* Staggered Letter Text Reveal */}
           <div className="font-semibold tracking-tight text-2xl sm:text-4xl text-[#0a0a0a] dark:text-[#f2f2f2] flex items-center overflow-hidden select-none">
-            {"ShaswatHub".split("").map((char, index) => (
+            {"ShaswatShell".split("").map((char, index) => (
               <motion.span
                 key={index}
                 initial={{ y: "110%", opacity: 0 }}

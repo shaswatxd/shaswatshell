@@ -11,23 +11,23 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata = {
-  metadataBase: new URL('https://shaswathub.xyz'),
-  title: 'ShaswatHub — Dev Console | Building, Shipping, Breaking',
+  metadataBase: new URL('https://shaswatshell.vercel.app'),
+  title: 'ShaswatShell — Dev Console | Building, Shipping, Breaking',
   description: 'Personal dev console of Shaswat — a live index of projects, desktop apps, and web tools. Built with Next.js, React Three Fiber, Three.js, GSAP and Spline.',
   keywords: ['developer', 'portfolio', 'Next.js', 'Three.js', 'React', 'GSAP', 'Spline', 'webGL'],
   authors: [{ name: 'Srijan Shaswat' }],
   openGraph: {
-    title: 'ShaswatHub — Dev Console',
+    title: 'ShaswatShell — Dev Console',
     description: 'A live index of projects, repos, and experiments — from desktop apps to web tools.',
     type: 'website',
-    url: 'https://shaswathub.xyz',
-    siteName: 'ShaswatHub',
+    url: 'https://shaswatshell.vercel.app',
+    siteName: 'ShaswatShell',
     locale: 'en_US',
-    images: [{ url: '/avatar.png', width: 512, height: 512, alt: 'ShaswatHub' }],
+    images: [{ url: '/avatar.png', width: 512, height: 512, alt: 'ShaswatShell' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ShaswatHub — Dev Console',
+    title: 'ShaswatShell — Dev Console',
     description: 'A live index of projects, repos, and experiments — from desktop apps to web tools.',
     images: ['/avatar.png'],
   },
@@ -60,9 +60,9 @@ const jsonLd = {
   mainEntity: {
     '@type': 'Person',
     name: 'Srijan Shaswat',
-    alternateName: 'ShaswatHub',
-    url: 'https://shaswathub.xyz',
-    image: 'https://shaswathub.xyz/avatar.png',
+    alternateName: 'ShaswatShell',
+    url: 'https://shaswatshell.vercel.app',
+    image: 'https://shaswatshell.vercel.app/avatar.png',
     jobTitle: 'Full-Stack & Desktop Developer',
     sameAs: ['https://github.com/shaswatxd'],
     knowsAbout: ['React', 'Next.js', 'Electron', 'Three.js', 'Node.js', 'WebRTC'],

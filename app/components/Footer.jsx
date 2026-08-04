@@ -61,7 +61,7 @@ const Footer = React.memo(function Footer() {
                 />
               </motion.svg>
             </div>
-            <span className="font-semibold text-sm text-[#0a0a0a] dark:text-[#f2f2f2]">ShaswatHub</span>
+            <span className="font-semibold text-sm text-[#0a0a0a] dark:text-[#f2f2f2]">ShaswatShell</span>
           </motion.div>
           <div className="font-mono text-[9px] text-[#999] dark:text-[#777] tracking-wide">// Building things that matter, one commit at a time.</div>
         </div>
@@ -89,7 +89,7 @@ const Footer = React.memo(function Footer() {
       {/* Copyright lines */}
       <div className="max-w-[1440px] mx-auto mt-8 pt-6 border-t border-[#e8e8e8] dark:border-white/10 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4 select-none">
         <div className="font-mono text-[9px] text-[#999] dark:text-[#777]">
-          &copy; {currentYear} &middot; developed with &hearts; &amp; chai &middot; ShaswatHub shell.
+          &copy; {currentYear} &middot; developed with &hearts; &amp; chai &middot; ShaswatShell.
         </div>
         <div className="font-mono text-[8px] text-[#bbb] dark:text-[#555] tracking-wider">
           SYSTEM_VERSION_4.2.0_SECURE

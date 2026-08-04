@@ -147,7 +147,7 @@ const Navigation = React.memo(function Navigation() {
             </motion.svg>
           </div>
           <span className="font-semibold tracking-tight text-base text-[#0a0a0a] dark:text-[#f2f2f2] flex overflow-hidden h-[1.5em] items-center">
-            {"ShaswatHub".split("").map((char, i) => (
+            {"ShaswatShell".split("").map((char, i) => (
               <span key={i} className="relative inline-block overflow-hidden h-[1.2em]">
                 <motion.span
                   variants={letterVariants1}
