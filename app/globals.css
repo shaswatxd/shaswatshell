@@ -302,13 +302,14 @@
   position: relative;
   overflow: hidden;
 }
+.ripple,
 .ripple-effect {
   position: absolute;
   border-radius: 50%;
-  background: rgba(128, 128, 128, 0.35);
+  background: rgba(255, 255, 255, 0.35);
   mix-blend-mode: difference;
   transform: scale(0);
-  animation: ripple 0.65s linear;
+  animation: ripple 0.65s linear forwards;
   pointer-events: none;
 }
 @keyframes ripple {

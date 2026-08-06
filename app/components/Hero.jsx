@@ -69,6 +69,12 @@ function triggerRipple(e) {
   }
 
   btn.appendChild(circle);
+
+  setTimeout(() => {
+    if (circle && circle.parentNode) {
+      circle.remove();
+    }
+  }, 650);
 }
 
 const Hero = React.memo(function Hero() {
