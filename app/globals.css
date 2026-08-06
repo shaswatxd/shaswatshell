@@ -181,22 +181,28 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Bordered grid card — the core surface of the minimal design */
+/* Bordered glass card — translucent surface letting 3D backdrop shine through */
 .card {
-  border: 1px solid #e8e8e8;
-  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
 }
 .card:hover {
   border-color: #00c2d1;
   transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.82);
 }
 .dark .card {
   border-color: rgba(255, 255, 255, 0.12);
-  background: #0a0a0a;
+  background: rgba(10, 10, 10, 0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 .dark .card:hover {
   border-color: #00c2d1;
+  background: rgba(10, 10, 10, 0.75);
 }
 
 .btn-primary {

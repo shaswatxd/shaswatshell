@@ -6,7 +6,7 @@ import { Float, Icosahedron, Octahedron, Ring } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Orbiting High-Definition Cyber Particle Swarm
-function ParticleSwarm({ count = 400 }) {
+function ParticleSwarm({ count = 450 }) {
   const pointsRef = useRef();
 
   const [positions, colors] = useMemo(() => {
@@ -21,7 +21,7 @@ function ParticleSwarm({ count = 400 }) {
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = 1.2 + Math.random() * 2.2;
+      const r = 1.2 + Math.random() * 2.8;
 
       const x = r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
@@ -42,8 +42,8 @@ function ParticleSwarm({ count = 400 }) {
 
   useFrame((state, delta) => {
     if (pointsRef.current) {
-      pointsRef.current.rotation.y += delta * 0.06;
-      pointsRef.current.rotation.x += delta * 0.03;
+      pointsRef.current.rotation.y += delta * 0.05;
+      pointsRef.current.rotation.x += delta * 0.025;
     }
   });
 
@@ -63,14 +63,14 @@ function ParticleSwarm({ count = 400 }) {
         size={0.045}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.75}
         sizeAttenuation
       />
     </points>
   );
 }
 
-// Sleek Cyber Core Geometry
+// Sleek Cyber Core Geometry with Scroll Depth Reactivity
 function CyberCore({ mousePos, isMobile }) {
   const groupRef = useRef();
   const outerRef = useRef();
@@ -79,38 +79,41 @@ function CyberCore({ mousePos, isMobile }) {
   const ring2Ref = useRef();
 
   useFrame((state, delta) => {
+    const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
+    
     if (groupRef.current) {
+      // Smooth tilt towards mouse + slow vertical scroll movement
       groupRef.current.rotation.y += (mousePos.current.x * 0.3 - groupRef.current.rotation.y) * 0.03;
-      groupRef.current.rotation.x += (-mousePos.current.y * 0.3 - groupRef.current.rotation.x) * 0.03;
+      groupRef.current.rotation.x = scrollY * 0.0008 + (-mousePos.current.y * 0.3);
     }
 
     if (outerRef.current) {
-      outerRef.current.rotation.y += delta * 0.18;
-      outerRef.current.rotation.x += delta * 0.1;
+      outerRef.current.rotation.y += delta * 0.16;
+      outerRef.current.rotation.x += delta * 0.08;
     }
 
     if (innerRef.current) {
-      innerRef.current.rotation.y -= delta * 0.3;
-      innerRef.current.rotation.z += delta * 0.15;
+      innerRef.current.rotation.y -= delta * 0.25;
+      innerRef.current.rotation.z += delta * 0.12;
     }
 
     if (ring1Ref.current) {
-      ring1Ref.current.rotation.x = Math.PI / 3 + state.clock.getElapsedTime() * 0.2;
-      ring1Ref.current.rotation.y = state.clock.getElapsedTime() * 0.15;
+      ring1Ref.current.rotation.x = Math.PI / 3 + state.clock.getElapsedTime() * 0.18;
+      ring1Ref.current.rotation.y = state.clock.getElapsedTime() * 0.12;
     }
 
     if (ring2Ref.current) {
-      ring2Ref.current.rotation.x = -Math.PI / 4 + state.clock.getElapsedTime() * 0.18;
-      ring2Ref.current.rotation.z = state.clock.getElapsedTime() * 0.25;
+      ring2Ref.current.rotation.x = -Math.PI / 4 + state.clock.getElapsedTime() * 0.15;
+      ring2Ref.current.rotation.z = state.clock.getElapsedTime() * 0.2;
     }
   });
 
-  // Position offset: shifted slightly left for perfect desktop alignment
-  const positionOffset = isMobile ? [0, 0, 0] : [0.85, 0, 0];
-  const groupScale = isMobile ? 1.0 : 1.25;
+  // Position offset: proper dead-center [0, 0, 0] alignment for desktop & mobile
+  const positionOffset = [0, 0, 0];
+  const groupScale = isMobile ? 0.82 : 1.1;
 
   return (
-    <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
+    <Float speed={1.8} rotationIntensity={0.25} floatIntensity={0.4}>
       <group ref={groupRef} position={positionOffset} scale={groupScale}>
         {/* Outer Wireframe Cyber Sphere */}
         <Icosahedron ref={outerRef} args={[1.35, 2]}>
@@ -118,7 +121,7 @@ function CyberCore({ mousePos, isMobile }) {
             color="#00c2d1"
             wireframe
             transparent
-            opacity={0.3}
+            opacity={0.28}
           />
         </Icosahedron>
 
@@ -136,25 +139,25 @@ function CyberCore({ mousePos, isMobile }) {
         {/* Core Solid Light Glowing Bulb */}
         <mesh scale={0.38}>
           <sphereGeometry args={[1, 32, 32]} />
-          <meshBasicMaterial color="#00c2d1" transparent opacity={0.45} />
+          <meshBasicMaterial color="#00c2d1" transparent opacity={0.4} />
         </mesh>
 
         {/* Orbiting Gyros Ring 1 */}
         <group ref={ring1Ref}>
           <Ring args={[1.6, 1.63, 64]}>
-            <meshBasicMaterial color="#8b6bff" side={THREE.DoubleSide} transparent opacity={0.4} />
+            <meshBasicMaterial color="#8b6bff" side={THREE.DoubleSide} transparent opacity={0.35} />
           </Ring>
         </group>
 
         {/* Orbiting Gyros Ring 2 */}
         <group ref={ring2Ref}>
           <Ring args={[1.8, 1.82, 64]}>
-            <meshBasicMaterial color="#00c2d1" side={THREE.DoubleSide} transparent opacity={0.3} />
+            <meshBasicMaterial color="#00c2d1" side={THREE.DoubleSide} transparent opacity={0.28} />
           </Ring>
         </group>
 
         {/* High-Density HD Particle Swarm */}
-        <ParticleSwarm count={400} />
+        <ParticleSwarm count={450} />
       </group>
     </Float>
   );
@@ -190,11 +193,11 @@ export default function Hero3D() {
   if (!mounted) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
+    <div className="fixed inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
       <Canvas
-        dpr={[1, 2]} // Crisp HD Retina Rendering
-        camera={{ position: [0, 0, 5.2], fov: 48 }}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        dpr={[1, 2.5]} // Ultra-Crisp HD Native Retina & Android FHD+ Rendering
+        camera={{ position: [0, 0, 5.0], fov: 48 }}
+        gl={{ antialias: true, alpha: true, powerPreference: "high-performance", precision: "highp" }}
         style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
       >
         <ambientLight intensity={0.7} />
