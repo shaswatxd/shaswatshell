@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
+import ScrollProgress from './ScrollProgress';
 
 const LINKS = [
   { href: '#builds', label: 'Builds' },
@@ -101,13 +102,15 @@ const Navigation = React.memo(function Navigation() {
   }, []);
 
   return (
-    <motion.nav
-      className="sticky top-0 z-[100] bg-white dark:bg-[#0a0a0a] border-b border-[#0a0a0a] dark:border-white/15 transition-colors duration-300"
-      style={{ boxShadow: scrolled ? '0 8px 24px -18px rgba(0,0,0,0.35)' : 'none' }}
-      initial={{ opacity: 0, y: -30 }}
-      animate={{ y: visible ? 0 : -90, opacity: visible ? 1 : 0 }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-    >
+    <>
+      <ScrollProgress />
+      <motion.nav
+        className="sticky top-0 z-[100] backdrop-blur-md bg-white/75 dark:bg-[#0a0a0a]/75 border-b border-[#0a0a0a]/10 dark:border-white/10 transition-colors duration-300"
+        style={{ boxShadow: scrolled ? '0 8px 32px -16px rgba(0,0,0,0.25)' : 'none' }}
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ y: visible ? 0 : -90, opacity: visible ? 1 : 0 }}
+        transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      >
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16 h-20 flex items-center justify-between">
         {/* Logo */}
         <motion.a 
@@ -234,6 +237,7 @@ const Navigation = React.memo(function Navigation() {
         )}
       </AnimatePresence>
     </motion.nav>
+    </>
   );
 });
 

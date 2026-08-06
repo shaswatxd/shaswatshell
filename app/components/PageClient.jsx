@@ -174,7 +174,7 @@ const PageClient = React.memo(function PageClient() {
     mq.addEventListener("change", handleMQ, { passive: true });
 
     let lenis;
-    let rafId;
+    let updateLenis;
     let handleAnchorClick;
 
     if (!mq.matches) {
@@ -191,7 +191,7 @@ const PageClient = React.memo(function PageClient() {
       lenis.on('scroll', ScrollTrigger.update);
 
       // Tell GSAP ticker to drive Lenis scroll loop cleanly (Single RAF driver)
-      const updateLenis = (time) => {
+      updateLenis = (time) => {
         lenis.raf(time * 1000);
       };
       gsap.ticker.add(updateLenis);
@@ -220,7 +220,7 @@ const PageClient = React.memo(function PageClient() {
       if (handleAnchorClick) document.removeEventListener('click', handleAnchorClick);
       if (lenis) {
         lenis.destroy();
-        gsap.ticker.remove(updateLenis);
+        if (updateLenis) gsap.ticker.remove(updateLenis);
         if (window.__lenis === lenis) window.__lenis = null;
       }
     };

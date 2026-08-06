@@ -112,7 +112,13 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "D:\\All Projects\\ShaswatHub Page",
+    "outputFileTracingRoot": "D:\\All Projects\\ShaswatShell Page",
+    "allowedDevOrigins": [
+      "10.236.76.112",
+      "10.236.76.112:3000",
+      "localhost:3000",
+      "127.0.0.1:3000"
+    ],
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -315,7 +321,7 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
     "turbopack": {
-      "root": "D:\\All Projects\\ShaswatHub Page"
+      "root": "D:\\All Projects\\ShaswatShell Page"
     },
     "distDirRoot": ".next",
     "_originalRewrites": {
@@ -324,7 +330,7 @@ self.__SERVER_FILES_MANIFEST={
       "fallback": []
     }
   },
-  "appDir": "D:\\All Projects\\ShaswatHub Page",
+  "appDir": "D:\\All Projects\\ShaswatShell Page",
   "relativeAppDir": "",
   "files": [
     ".next\\package.json",
@@ -344,7 +350,7 @@ self.__SERVER_FILES_MANIFEST={
     ".next\\server\\next-font-manifest.js",
     ".next\\server\\next-font-manifest.json",
     ".next\\required-server-files.json",
-    ".next\\static\\chunks\\12z4lk1qahf4v.css"
+    ".next\\static\\chunks\\17erx-znjdp6s.css"
   ],
   "ignore": []
 }

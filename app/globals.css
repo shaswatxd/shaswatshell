@@ -134,49 +134,52 @@
   }
 }
 
-/* Keyframes */
-@keyframes marqueeScroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-@keyframes gridScroll {
-  from { background-position: 0 0; }
-  to   { background-position: 60px 60px; }
-}
-
-@keyframes floatBlob1 {
+/* Aurora Mesh Gradient Keyframes */
+@keyframes auroraBlob1 {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(60px, -40px, 0) scale(1.1); }
+  50%      { transform: translate3d(80px, -50px, 0) scale(1.15); }
 }
 
-@keyframes floatBlob2 {
+@keyframes auroraBlob2 {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(-50px, 50px, 0) scale(1.08); }
+  50%      { transform: translate3d(-70px, 60px, 0) scale(1.1); }
 }
 
-@keyframes laserSweep {
-  0% { transform: translate3d(-100%, -100%, 0) rotate(45deg); opacity: 0; }
-  15% { opacity: 0.45; }
-  50% { opacity: 0.45; }
-  100% { transform: translate3d(200%, 200%, 0) rotate(45deg); opacity: 0; }
+@keyframes auroraBlob3 {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50%      { transform: translate3d(50px, -60px, 0) scale(1.2); }
 }
 
-@keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); opacity: 0.8; }
-  50%       { transform: translateY(8px); opacity: 0.3; }
+.animate-aurora-blob1 { animation: auroraBlob1 18s ease-in-out infinite; }
+.animate-aurora-blob2 { animation: auroraBlob2 22s ease-in-out infinite; }
+.animate-aurora-blob3 { animation: auroraBlob3 25s ease-in-out infinite; }
+
+/* Glassmorphism Panel Utilities */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0; }
+.dark .glass-panel {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Gradient Text Highlight */
+.gradient-text {
+  background: linear-gradient(135deg, #0a0a0a 30%, #00c2d1 70%, #8b6bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
-.animate-fadeup { animation: fadeUp 0.7s ease both; }
+.dark .gradient-text {
+  background: linear-gradient(135deg, #ffffff 30%, #00c2d1 70%, #8b6bff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 /* Bordered grid card — the core surface of the minimal design */
 .card {

@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useRef, useState, useEffect, memo, useCallback } from 'react';
-import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useRef, useState, useEffect, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // ─── Projects Data ──────────────────────────────────────────────────────────
 const PROJECTS = [
   {
     name: "NovaDL",
-    desc: "A modern, high-performance multi-threaded download manager for Windows built with Electron, React, and WASM. Features worker-thread chunk splitting, real HLS video stream downloading, crash-safe SQLite state persistence, and browser extension integration.",
+    desc: "A modern, high-performance multi-threaded download manager for Windows & Android (APK) built with Electron, React, and WASM. Features worker-thread chunk splitting, real HLS video stream downloading, crash-safe SQLite state persistence, and browser extension integration.",
     icon: "📥",
     glow: "violet",
     badge: "APP",
@@ -16,6 +16,7 @@ const PROJECTS = [
     liveUrl: "https://novadl.vercel.app",
     features: [
       "⚡ Multi-Threaded Acceleration with Work-Stealing Workers",
+      "📱 Cross-Platform Builds (Windows Desktop App & Android APK)",
       "🎥 Real HLS Video Downloader & Quality Stream Selection",
       "💾 Crash-Safe Resumable Engine (WASM SQLite Persistence)",
       "🧩 Browser Extension Integration (Chrome, Edge & Firefox)",
@@ -23,8 +24,8 @@ const PROJECTS = [
       "🔒 Sandboxed IPC Architecture & Zero Telemetry Privacy"
     ],
     details: {
-      architecture: "Built on Electron, React & TypeScript with worker-thread byte-range splitting, WASM SQLite chunk state persistence, FFmpeg stream assembly, and Manifest V3 extension bridge.",
-      modules: ["Worker-Thread Download Engine", "HLS Stream Parser & Assembler", "WASM SQLite Persistence Layer", "Manifest V3 Extension Bridge", "Task Scheduler & Speed Limiter"]
+      architecture: "Cross-platform architecture powering Windows Desktop & Android APK editions. Features worker-thread byte-range splitting, WASM SQLite chunk state persistence, FFmpeg stream assembly, and Manifest V3 extension bridge.",
+      modules: ["Worker-Thread Download Engine", "Android APK & Desktop Runtime", "HLS Stream Parser & Assembler", "WASM SQLite Persistence Layer", "Manifest V3 Extension Bridge", "Task Scheduler & Speed Limiter"]
     }
   },
   {
@@ -274,41 +275,67 @@ const ProjectModal = memo(function ProjectModal({ project, onClose }) {
   );
 });
 
-// Card Component
+// Card Component with 3D Tilt & Glassmorphism physics
 const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) {
   const col = GLOW_COLORS[project.glow] || GLOW_COLORS.cyan;
   const cardRef = useRef(null);
-
   const rafRef = useRef(null);
 
-  // Mousemove handler for card spotlight - throttled with rAF
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  // Mousemove handler for 3D card tilt & spotlight
   const handleMouseMove = (e) => {
-    if (rafRef.current) return;
     const card = cardRef.current;
     if (!card) return;
     const rect = card.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
+    
+    // Calculate tilt angles (-10deg to +10deg)
+    const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
+    const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
+
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
+      setTilt({ x: rotateX, y: rotateY });
       card.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
       card.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
-      rafRef.current = null;
     });
+  };
+
+  const handleMouseLeave = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    setTilt({ x: 0, y: 0 });
   };
 
   return (
     <motion.div
       ref={cardRef}
       onMouseMove={handleMouseMove}
-      onClick={() => onOpenDetails(project)}
-      className={`card spotlight-card p-8 flex flex-col cursor-pointer group ${project.featured ? 'card-featured' : ''} ${borderClasses}`}
+      onMouseLeave={handleMouseLeave}
+      onClick={() => {
+        onOpenDetails(project);
+      }}
+      className={`card spotlight-card backdrop-blur-md p-8 flex flex-col cursor-pointer group relative overflow-hidden transition-all duration-300 ${project.featured ? 'card-featured' : ''} ${borderClasses}`}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: tilt.x === 0 ? "transform 0.5s ease-out" : "none"
+      }}
       initial={{ opacity: 0, y: 35 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-50px' }}
       transition={{ type: "spring", stiffness: 75, damping: 14, delay: idx * 0.06 }}
     >
+      {/* Animated Top Border Beam on Hover */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        style={{ background: `linear-gradient(90deg, transparent, ${col}, transparent)` }}
+      />
+
       <div className="relative z-10 flex items-center justify-between mb-8">
-        <div className="w-10 h-10 border border-[#0a0a0a] dark:border-white/25 flex items-center justify-center text-lg">
+        <div 
+          className="w-11 h-11 border border-[#0a0a0a]/20 dark:border-white/25 bg-white/50 dark:bg-white/5 rounded-lg flex items-center justify-center text-xl shadow-sm transition-transform duration-300 group-hover:scale-105"
+        >
           {project.icon}
         </div>
         <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-widest text-[#666] dark:text-[#999]">
@@ -337,7 +364,9 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
             href={project.liveUrl}
             target="_blank"
             rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
             className="inline-flex items-center px-6 py-1.5 rounded-full text-xs font-semibold bg-[#0a0a0a] text-white border border-[#0a0a0a] dark:bg-white dark:text-[#0a0a0a] dark:border-white hover:bg-transparent hover:text-[#0a0a0a] dark:hover:bg-transparent dark:hover:text-white transition-all duration-300 shadow-[0_4px_12px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_12px_rgba(255,255,255,0.08)]"
           >
             <span>Launch</span>
@@ -354,6 +383,7 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
 export default memo(function Projects() {
   const [activeProject, setActiveProject] = useState(null);
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filters = [
     { id: "ALL", label: "All Projects" },
@@ -362,12 +392,17 @@ export default memo(function Projects() {
   ];
 
   const filteredProjects = PROJECTS.filter((proj) => {
-    if (activeFilter === "APP") {
-      return proj.badge === "APP";
-    } else if (activeFilter === "WEB") {
-      return proj.badge === "SITE" || proj.badge === "WEB/APP";
-    }
-    return true;
+    const matchesCategory =
+      activeFilter === "ALL" ||
+      (activeFilter === "APP" && proj.badge === "APP") ||
+      (activeFilter === "WEB" && (proj.badge === "SITE" || proj.badge === "WEB/APP"));
+
+    const matchesSearch =
+      !searchQuery.trim() ||
+      proj.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      proj.desc.toLowerCase().includes(searchQuery.toLowerCase());
+
+    return matchesCategory && matchesSearch;
   });
 
   return (
@@ -383,14 +418,16 @@ export default memo(function Projects() {
         </div>
       </div>
 
-      {/* ── Filter Tabs ── */}
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 pb-8 flex items-center justify-start">
+      {/* ── Filter Tabs & Search Bar ── */}
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 pb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         {/* Category Pill Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
           {filters.map((tab) => (
             <button
               key={tab.id}
-              onClick={() => setActiveFilter(tab.id)}
+              onClick={() => {
+                setActiveFilter(tab.id);
+              }}
               className={`px-4 py-2 text-xs font-mono tracking-wider uppercase border transition-all duration-200 whitespace-nowrap ${
                 activeFilter === tab.id
                   ? 'border-cyan bg-cyan/10 text-cyan font-bold shadow-[0_0_12px_rgba(0,194,209,0.2)]'
@@ -400,6 +437,25 @@ export default memo(function Projects() {
               {tab.label}
             </button>
           ))}
+        </div>
+
+        {/* Live Search Input */}
+        <div className="relative w-full sm:w-64">
+          <input
+            type="text"
+            placeholder="Search projects..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full px-4 py-2 pl-9 font-mono text-xs border border-[#e8e8e8] dark:border-white/15 bg-white dark:bg-[#0a0a0a] text-[#0a0a0a] dark:text-white rounded-md focus:border-cyan focus:outline-none transition-colors"
+          />
+          <svg
+            className="absolute left-3 top-2.5 w-3.5 h-3.5 text-[#888]"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
         </div>
       </div>
 
@@ -436,7 +492,10 @@ export default memo(function Projects() {
         {activeProject && (
           <ProjectModal
             project={activeProject}
-            onClose={() => setActiveProject(null)}
+            onClose={() => {
+              soundManager.playClick();
+              setActiveProject(null);
+            }}
           />
         )}
       </AnimatePresence>

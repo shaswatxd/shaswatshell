@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 const COMMANDS = {
   help: `Available commands:
+  • neofetch  : System & environment specs summary
   • whoami    : About Srijan Shaswat
   • projects  : List live projects & repos
   • skills    : Tech stack & tools
@@ -14,13 +15,26 @@ const COMMANDS = {
   • clear     : Clear terminal output
   • sudo      : Execute with superuser privileges`,
 
+  neofetch: `
+  SHASWATSHELL v2.5 (x86_64-pc-nextjs)
+  ------------------------------------
+  OS       : ShaswatShell WebOS / Next.js 16 (App Router)
+  Host     : High-Performance Vercel Edge Architecture
+  Kernel   : React 19.2.7 + WebGL / Three.js
+  Uptime   : 99.98% (Production Live)
+  Packages : 15 (GSAP, Framer Motion, Lenis, R3F)
+  Shell    : zsh / ShaswatShell Terminal
+  CPU      : Multi-threaded Web Workers Enabled
+  GPU      : WebGL 60 FPS (dpr=1)
+  Theme    : Dynamic Adaptive System Theme`,
+
   whoami: `name      : Srijan Shaswat
 role      : Full-Stack & Desktop Developer
 focus     : Desktop Apps · Web Tools · High Performance Interfaces
 currently : Shipping software, writing code & breaking bugs`,
 
   projects: `⚡ SHASWATSHELL LIVE REPOSITORY INDEX:
-  1. NovaDL       : Multi-threaded Download Manager for Windows with HLS Support
+  1. NovaDL       : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
   2. VoiceWave    : Peer-to-peer real-time browser voice chat app
   3. We Plays     : Glassmorphic music player with lyrics & visualizer
   4. JustPDFCraft : 100% Client-Side PDF Utilities Toolkit
@@ -43,18 +57,17 @@ Access Granted: You already hold root privileges on ShaswatShell OS 👑`
 
 export default memo(function Terminal() {
   const [history, setHistory] = useState([
-    { type: 'cmd', text: 'whoami' },
-    { type: 'output', text: COMMANDS.whoami },
-    { type: 'info', text: 'Type "help" to see available commands or "matrix" for a surprise.' }
+    { type: 'cmd', text: 'neofetch' },
+    { type: 'output', text: COMMANDS.neofetch },
+    { type: 'info', text: 'Type "help" to see commands, press TAB to auto-complete.' }
   ]);
   const [inputVal, setInputVal] = useState("");
   const [cmdIndex, setCmdIndex] = useState(-1);
-  const [pastCmds, setPastCmds] = useState(['whoami']);
+  const [pastCmds, setPastCmds] = useState(['neofetch']);
   const [isMatrix, setIsMatrix] = useState(false);
 
   const inputRef = useRef(null);
   const terminalEndRef = useRef(null);
-
   const isFirstRender = useRef(true);
 
   // Auto scroll to bottom on new output (skipping initial page mount)
@@ -72,6 +85,7 @@ export default memo(function Terminal() {
     const rawCmd = inputVal.trim();
     if (!rawCmd) return;
 
+    soundManager.playClick();
     const cmd = rawCmd.toLowerCase();
     const newHistory = [...history, { type: 'cmd', text: rawCmd }];
     setPastCmds((prev) => [...prev, rawCmd]);
@@ -92,6 +106,7 @@ export default memo(function Terminal() {
       newHistory.push({ type: 'output', text: `Switched theme to ${next ? 'DARK' : 'LIGHT'} mode ☀️🌙` });
     } else if (cmd === 'matrix') {
       setIsMatrix(true);
+      soundManager.playMatrix();
       newHistory.push({ type: 'output', text: 'INITIATING CYBER MATRIX STREAM...' });
       setTimeout(() => setIsMatrix(false), 4500);
     } else if (COMMANDS[cmd]) {
@@ -104,9 +119,20 @@ export default memo(function Terminal() {
     setInputVal("");
   };
 
-  // Keyboard navigation UP/DOWN arrow for history
+  // Keyboard navigation UP/DOWN arrow & TAB completion
   const handleKeyDown = (e) => {
-    if (e.key === 'ArrowUp') {
+    soundManager.playKeypress();
+
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const current = inputVal.toLowerCase().trim();
+      if (!current) return;
+      const allCmdKeys = Object.keys(COMMANDS).concat(['clear', 'cls', 'theme', 'matrix']);
+      const match = allCmdKeys.find((c) => c.startsWith(current));
+      if (match) {
+        setInputVal(match);
+      }
+    } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (pastCmds.length === 0) return;
       const nextIdx = cmdIndex === -1 ? pastCmds.length - 1 : Math.max(0, cmdIndex - 1);
