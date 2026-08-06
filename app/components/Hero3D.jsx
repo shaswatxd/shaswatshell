@@ -6,7 +6,7 @@ import { Float, Icosahedron, Octahedron, Ring } from '@react-three/drei';
 import * as THREE from 'three';
 
 // Orbiting High-Definition Cyber Particle Swarm
-function ParticleSwarm({ count = 350 }) {
+function ParticleSwarm({ count = 300 }) {
   const pointsRef = useRef();
 
   const [positions, colors] = useMemo(() => {
@@ -21,7 +21,7 @@ function ParticleSwarm({ count = 350 }) {
       const v = Math.random();
       const theta = u * 2.0 * Math.PI;
       const phi = Math.acos(2.0 * v - 1.0);
-      const r = 1.2 + Math.random() * 1.6;
+      const r = 1.2 + Math.random() * 1.5;
 
       const x = r * Math.sin(phi) * Math.cos(theta);
       const y = r * Math.sin(phi) * Math.sin(theta);
@@ -80,8 +80,8 @@ function CyberCore({ mousePos, isMobile }) {
 
   useFrame((state, delta) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y += (mousePos.current.x * 0.3 - groupRef.current.rotation.y) * 0.04;
-      groupRef.current.rotation.x += (-mousePos.current.y * 0.3 - groupRef.current.rotation.x) * 0.04;
+      groupRef.current.rotation.y += (mousePos.current.x * 0.35 - groupRef.current.rotation.y) * 0.04;
+      groupRef.current.rotation.x += (-mousePos.current.y * 0.35 - groupRef.current.rotation.x) * 0.04;
     }
 
     if (outerRef.current) {
@@ -105,15 +105,15 @@ function CyberCore({ mousePos, isMobile }) {
     }
   });
 
-  // Responsive scale: centered on mobile, right-offset on desktop
-  const positionOffset = isMobile ? [0, 0, 0] : [1.4, 0, 0];
-  const groupScale = isMobile ? 1.0 : 1.35;
+  // Perfectly centered inside container — no edge clipping!
+  const positionOffset = [0, 0, 0];
+  const groupScale = isMobile ? 0.95 : 1.15;
 
   return (
     <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
       <group ref={groupRef} position={positionOffset} scale={groupScale}>
         {/* Outer Wireframe Cyber Sphere */}
-        <Icosahedron ref={outerRef} args={[1.35, 2]}>
+        <Icosahedron ref={outerRef} args={[1.3, 2]}>
           <meshBasicMaterial
             color="#00c2d1"
             wireframe
@@ -123,7 +123,7 @@ function CyberCore({ mousePos, isMobile }) {
         </Icosahedron>
 
         {/* Inner Glowing Crystal Octahedron */}
-        <Octahedron ref={innerRef} args={[0.7, 0]}>
+        <Octahedron ref={innerRef} args={[0.65, 0]}>
           <meshStandardMaterial
             color="#00f0ff"
             emissive="#006677"
@@ -134,27 +134,27 @@ function CyberCore({ mousePos, isMobile }) {
         </Octahedron>
 
         {/* Core Solid Light Glowing Bulb */}
-        <mesh scale={0.38}>
+        <mesh scale={0.35}>
           <sphereGeometry args={[1, 32, 32]} />
           <meshBasicMaterial color="#00c2d1" transparent opacity={0.5} />
         </mesh>
 
         {/* Orbiting Gyros Ring 1 */}
         <group ref={ring1Ref}>
-          <Ring args={[1.6, 1.63, 64]}>
+          <Ring args={[1.55, 1.58, 64]}>
             <meshBasicMaterial color="#8b6bff" side={THREE.DoubleSide} transparent opacity={0.45} />
           </Ring>
         </group>
 
         {/* Orbiting Gyros Ring 2 */}
         <group ref={ring2Ref}>
-          <Ring args={[1.8, 1.82, 64]}>
+          <Ring args={[1.75, 1.77, 64]}>
             <meshBasicMaterial color="#00c2d1" side={THREE.DoubleSide} transparent opacity={0.35} />
           </Ring>
         </group>
 
         {/* High-Density HD Particle Swarm */}
-        <ParticleSwarm count={350} />
+        <ParticleSwarm count={300} />
       </group>
     </Float>
   );
@@ -190,10 +190,10 @@ export default function Hero3D() {
   if (!mounted) return null;
 
   return (
-    <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
+    <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[500px] flex items-center justify-center pointer-events-none select-none overflow-hidden">
       <Canvas
-        dpr={[1, 2]} // HD Crisp Retina Rendering
-        camera={{ position: [0, 0, 4.8], fov: 48 }}
+        dpr={1}
+        camera={{ position: [0, 0, 5.2], fov: 48 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
       >

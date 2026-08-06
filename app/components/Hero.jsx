@@ -223,7 +223,7 @@ const Hero = React.memo(function Hero() {
 
         {/* Right Column: Interactive 3D WebGL Canvas */}
         <motion.div 
-          className="lg:col-span-5 relative w-full h-[360px] sm:h-[480px] lg:h-[560px] flex items-center justify-center pointer-events-none mt-4 lg:mt-0 z-0"
+          className="lg:col-span-5 relative w-full flex items-center justify-center pointer-events-none mt-2 lg:mt-0 z-0 overflow-hidden"
           variants={itemVariants}
         >
           <Hero3D />
