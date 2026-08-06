@@ -1,87 +1,77 @@
 "use client";
 
-import React, { useRef, useEffect } from 'react';
-import dynamic from 'next/dynamic';
+import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import gsap from 'gsap';
+import dynamic from 'next/dynamic';
 
-const Hero3D = dynamic(() => import('./Hero3D'), { ssr: false });
+// Dynamic SSR-free import for WebGL Canvas
+const Hero3D = dynamic(() => import('./Hero3D'), { 
+  ssr: false,
+  loading: () => null
+});
 
-// Reusable Magnetic component using GSAP for smooth physics
+// Magnetic Wrapper for Interactive Buttons
 function MagneticButton({ children }) {
-  const ref = useRef(null);
+  const btnRef = useRef(null);
 
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
+  const handleMouseMove = (e) => {
+    const btn = btnRef.current;
+    if (!btn) return;
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
 
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const { left, top, width, height } = el.getBoundingClientRect();
-      const x = clientX - (left + width / 2);
-      const y = clientY - (top + height / 2);
+    btn.style.transform = `translate3d(${x * 0.25}px, ${y * 0.25}px, 0)`;
+  };
 
-      // Pull toward mouse (magnetic strength 0.35)
-      gsap.to(el, {
-        x: x * 0.35,
-        y: y * 0.35,
-        duration: 0.3,
-        ease: "power2.out"
-      });
-    };
+  const handleMouseLeave = () => {
+    const btn = btnRef.current;
+    if (!btn) return;
+    btn.style.transform = `translate3d(0px, 0px, 0)`;
+    btn.style.transition = 'transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  };
 
-    const handleMouseLeave = () => {
-      // Elastic rebound to original position
-      gsap.to(el, {
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: "elastic.out(1.1, 0.4)"
-      });
-    };
-
-    el.addEventListener("mousemove", handleMouseMove, { passive: true });
-    el.addEventListener("mouseleave", handleMouseLeave, { passive: true });
-
-    return () => {
-      el.removeEventListener("mousemove", handleMouseMove);
-      el.removeEventListener("mouseleave", handleMouseLeave);
-    };
-  }, []);
+  const handleMouseEnter = () => {
+    const btn = btnRef.current;
+    if (!btn) return;
+    btn.style.transition = 'none';
+  };
 
   return (
-    <div ref={ref} className="magnetic-container">
+    <div
+      ref={btnRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      onMouseEnter={handleMouseEnter}
+      className="inline-block transition-transform duration-200 ease-out"
+    >
       {children}
     </div>
   );
 }
 
-// Custom click ripple effect handler
-const triggerRipple = (e) => {
+// Click Ripple Animation Handler
+function triggerRipple(e) {
   const btn = e.currentTarget;
   const rect = btn.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+  const circle = document.createElement('span');
+  const diameter = Math.max(rect.width, rect.height);
+  const radius = diameter / 2;
 
-  const ripple = document.createElement("span");
-  ripple.className = "ripple-effect";
-  ripple.style.left = `${x}px`;
-  ripple.style.top = `${y}px`;
+  circle.style.width = circle.style.height = `${diameter}px`;
+  circle.style.left = `${e.clientX - rect.left - radius}px`;
+  circle.style.top = `${e.clientY - rect.top - radius}px`;
+  circle.classList.add('ripple');
 
-  // Ripple diameter covering the button diagonals
-  const size = Math.max(rect.width, rect.height) * 2;
-  ripple.style.width = `${size}px`;
-  ripple.style.height = `${size}px`;
+  const existingRipple = btn.getElementsByClassName('ripple')[0];
+  if (existingRipple) {
+    existingRipple.remove();
+  }
 
-  btn.appendChild(ripple);
-
-  setTimeout(() => {
-    ripple.remove();
-  }, 700);
-};
+  btn.appendChild(circle);
+}
 
 const Hero = React.memo(function Hero() {
-  // Motion variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {

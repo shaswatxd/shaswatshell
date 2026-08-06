@@ -82,7 +82,6 @@ function CyberCore({ mousePos, isMobile }) {
     const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
     
     if (groupRef.current) {
-      // Smooth tilt towards mouse + slow vertical scroll movement
       groupRef.current.rotation.y += (mousePos.current.x * 0.3 - groupRef.current.rotation.y) * 0.03;
       groupRef.current.rotation.x = scrollY * 0.0008 + (-mousePos.current.y * 0.3);
     }
@@ -108,7 +107,7 @@ function CyberCore({ mousePos, isMobile }) {
     }
   });
 
-  // Position offset: proper dead-center [0, 0, 0] alignment for desktop & mobile
+  // Proper dead center [0, 0, 0] alignment for desktop & mobile
   const positionOffset = [0, 0, 0];
   const groupScale = isMobile ? 0.82 : 1.1;
 
@@ -195,7 +194,7 @@ export default function Hero3D() {
   return (
     <div className="fixed inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
       <Canvas
-        dpr={[1, 2.5]} // Ultra-Crisp HD Native Retina & Android FHD+ Rendering
+        dpr={[1, 2.5]} // Ultra-Crisp HD Native Retina & Android Rendering
         camera={{ position: [0, 0, 5.0], fov: 48 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance", precision: "highp" }}
         style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
