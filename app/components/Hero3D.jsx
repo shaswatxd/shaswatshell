@@ -105,9 +105,9 @@ function CyberCore({ mousePos, isMobile }) {
     }
   });
 
-  // Position offset: desktop right-ambient placement, mobile centered
-  const positionOffset = isMobile ? [0, 0, 0] : [1.6, 0, 0];
-  const groupScale = isMobile ? 1.0 : 1.45;
+  // Position offset: shifted slightly left for perfect desktop alignment
+  const positionOffset = isMobile ? [0, 0, 0] : [0.85, 0, 0];
+  const groupScale = isMobile ? 1.0 : 1.25;
 
   return (
     <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
@@ -193,7 +193,7 @@ export default function Hero3D() {
     <div className="absolute inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
       <Canvas
         dpr={[1, 2]} // Crisp HD Retina Rendering
-        camera={{ position: [0, 0, 5.0], fov: 48 }}
+        camera={{ position: [0, 0, 5.2], fov: 48 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
       >
