@@ -35,7 +35,7 @@ currently : Shipping software, writing code & breaking bugs`,
 
   projects: `⚡ SHASWATSHELL LIVE REPOSITORY INDEX:
   1. NovaDL         : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
-  2. OmniDownloader : Dedicated social media video & reels downloader (Instagram, Twitter/X, Facebook)
+  2. OmniDownloader : All-in-one multi-engine media downloader & creator studio
   3. Bill Generator : Free bill & receipt generator with 30+ templates
   4. VoiceWave      : Peer-to-peer real-time browser voice chat app
   5. We Plays       : Glassmorphic music player with lyrics & visualizer

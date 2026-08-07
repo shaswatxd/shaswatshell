@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { soundManager } from '../utils/SoundManager';
 
 // ─── Projects Data ──────────────────────────────────────────────────────────
 const PROJECTS = [
@@ -30,21 +31,22 @@ const PROJECTS = [
   },
   {
     name: "OmniDownloader",
-    desc: "High-speed social media downloader dedicated exclusively to Instagram (Reels & Posts), Twitter / X (HD Videos & Clips), and Facebook (Reels & Videos). Built with Next.js App Router featuring dual-engine fallback (Cobalt API + self-hosted Koyeb backend), zero-lag extraction, and direct CDN streaming.",
-    icon: "📲",
+    desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
+    icon: "⚡",
     glow: "magenta",
     badge: "SITE",
-    githubUrl: "https://github.com/shaswatxd/omnigrab",
-    liveUrl: "https://omnidownloader.vercel.app",
+    githubUrl: "https://github.com/shaswatxd/omnidownloader",
+    liveUrl: "https://omnidownloader-one.vercel.app/",
     features: [
-      "⚡ Dedicated Social Media Downloader (Instagram, Twitter/X, Facebook)",
-      "🔄 Dual Fallback Engine (Cobalt API + Self-Hosted Koyeb Backend)",
-      "🚀 High-Speed Direct CDN Streaming & Zero Server Latency",
-      "📱 Mobile-Optimized Instant Link Parsing & Direct File Saving"
+      "⚡ Auto-Fallback Multi-Engine Stream Extraction",
+      "🎥 No Watermark HD Downloads (TikTok, YT, IG, Pinterest)",
+      "🎵 Spotify Song Search & MP3 Audio Extractor",
+      "☁️ Cloud Drive Unlocking (Terabox, MediaFire, Drive)",
+      "🔒 100% Free Client-Side & Server Sandbox Routing"
     ],
     details: {
-      architecture: "Next.js App Router full-stack media extraction tool optimized specifically for social media. Prioritizes primary Cobalt public API for instant response with seamless fallback to self-hosted yt-dlp + FFmpeg microservice on Koyeb. Directly streams videos without persistent server storage.",
-      modules: ["Dual-Engine Fallback Pipeline", "Instagram / Twitter / FB Extractor", "Direct Stream & CDN Proxy", "Upstash Redis Rate Limiter"]
+      architecture: "High-speed multi-engine extraction pipeline with dynamic failover routing, Spotify metadata resolver, YT-DLP/API worker proxies, and client-side download history.",
+      modules: ["Auto-Fallback Extraction Engine", "Spotify Metadata & Song Resolver", "Multi-Platform Media Parser", "Direct Cloud Drive Unlocker", "Client Download History Manager", "Interactive Creative Studio"]
     }
   },
 
@@ -513,7 +515,7 @@ export default memo(function Projects() {
           <ProjectModal
             project={activeProject}
             onClose={() => {
-              soundManager.playClick();
+              soundManager?.playClick?.();
               setActiveProject(null);
             }}
           />
