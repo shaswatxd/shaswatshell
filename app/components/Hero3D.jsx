@@ -162,6 +162,141 @@ function CyberCore({ mousePos, isMobile }) {
   );
 }
 
+// Mobile-Tailored Lightweight Cyber Constellation Canvas for Phone Browsers
+function MobileCyberConstellation() {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let animationFrameId;
+    let width = (canvas.width = window.innerWidth);
+    let height = (canvas.height = window.innerHeight);
+
+    const handleResize = () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    };
+    window.addEventListener('resize', handleResize, { passive: true });
+
+    // Floating particle nodes configuration
+    const nodeCount = Math.min(38, Math.floor(width / 12));
+    const colors = ['#00c2d1', '#8b6bff', '#ff3d9a', '#00f0ff'];
+
+    const nodes = Array.from({ length: nodeCount }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.4,
+      vy: (Math.random() - 0.5) * 0.4,
+      radius: Math.random() * 2 + 1.2,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      alpha: Math.random() * 0.5 + 0.35,
+    }));
+
+    let touchX = width / 2;
+    let touchY = height / 2;
+    const handleTouchMove = (e) => {
+      if (e.touches && e.touches[0]) {
+        touchX = e.touches[0].clientX;
+        touchY = e.touches[0].clientY;
+      }
+    };
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+    const render = () => {
+      ctx.clearRect(0, 0, width, height);
+
+      // Render soft cyber ambient glows behind text
+      const gradient1 = ctx.createRadialGradient(
+        width * 0.5, height * 0.3, 10,
+        width * 0.5, height * 0.3, width * 0.7
+      );
+      gradient1.addColorStop(0, 'rgba(0, 194, 209, 0.08)');
+      gradient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient1;
+      ctx.fillRect(0, 0, width, height);
+
+      const gradient2 = ctx.createRadialGradient(
+        width * 0.8, height * 0.7, 10,
+        width * 0.8, height * 0.7, width * 0.6
+      );
+      gradient2.addColorStop(0, 'rgba(139, 107, 255, 0.07)');
+      gradient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
+      ctx.fillStyle = gradient2;
+      ctx.fillRect(0, 0, width, height);
+
+      // Draw constellation lines between nearby nodes
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const dx = nodes[i].x - nodes[j].x;
+          const dy = nodes[i].y - nodes[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+
+          if (dist < 110) {
+            ctx.beginPath();
+            ctx.moveTo(nodes[i].x, nodes[i].y);
+            ctx.lineTo(nodes[j].x, nodes[j].y);
+            const lineAlpha = (1 - dist / 110) * 0.22;
+            ctx.strokeStyle = `rgba(0, 194, 209, ${lineAlpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Update and draw floating nodes
+      for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+
+        // Slight drift towards touch position if close
+        const tdx = touchX - node.x;
+        const tdy = touchY - node.y;
+        const tdist = Math.sqrt(tdx * tdx + tdy * tdy);
+        if (tdist < 140) {
+          node.x += (tdx / tdist) * 0.15;
+          node.y += (tdy / tdist) * 0.15;
+        }
+
+        node.x += node.vx;
+        node.y += node.vy;
+
+        if (node.x < 0 || node.x > width) node.vx *= -1;
+        if (node.y < 0 || node.y > height) node.vy *= -1;
+
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.globalAlpha = node.alpha;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+        ctx.globalAlpha = 1.0;
+      }
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    render();
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
+  }, []);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 w-full h-full pointer-events-none select-none z-0"
+    />
+  );
+}
+
 export default function Hero3D() {
   const mousePos = useRef({ x: 0, y: 0 });
   const [mounted, setMounted] = useState(false);
@@ -170,7 +305,7 @@ export default function Hero3D() {
   useEffect(() => {
     setMounted(true);
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
+      setIsMobile(window.innerWidth < 768);
     };
     checkMobile();
     window.addEventListener('resize', checkMobile, { passive: true });
@@ -191,10 +326,15 @@ export default function Hero3D() {
 
   if (!mounted) return null;
 
+  // Render ultra-lightweight fluid constellation on phone browsers, 3D WebGL core on desktops
+  if (isMobile) {
+    return <MobileCyberConstellation />;
+  }
+
   return (
     <div className="fixed inset-0 w-full h-full pointer-events-none select-none overflow-hidden z-0">
       <Canvas
-        dpr={[1, 2.5]} // Ultra-Crisp HD Native Retina & Android Rendering
+        dpr={[1, 2]} // Crisp native DPR for desktops
         camera={{ position: [0, 0, 5.0], fov: 48 }}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance", precision: "highp" }}
         style={{ pointerEvents: 'none', width: '100%', height: '100%' }}
@@ -208,3 +348,4 @@ export default function Hero3D() {
     </div>
   );
 }
+
