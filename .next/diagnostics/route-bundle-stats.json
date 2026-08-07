@@ -1,12 +1,12 @@
 [
   {
     "route": "/",
-    "firstLoadUncompressedJsBytes": 852107,
+    "firstLoadUncompressedJsBytes": 853308,
     "firstLoadChunkPaths": [
       ".next\\static\\chunks\\3s2vh4pxcpu4v.js",
       ".next\\static\\chunks\\14mumt5_n0xhi.js",
       ".next\\static\\chunks\\2p5nqvsm1gs4p.js",
-      ".next\\static\\chunks\\2oelf52iauvlp.js",
+      ".next\\static\\chunks\\2s_ayk37pec67.js",
       ".next\\static\\chunks\\073aet3kn1odu.js",
       ".next\\static\\chunks\\2ue2a-wykclzn.js",
       ".next\\static\\chunks\\0iec5q4ack_04.js",

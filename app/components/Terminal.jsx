@@ -34,11 +34,13 @@ focus     : Desktop Apps · Web Tools · High Performance Interfaces
 currently : Shipping software, writing code & breaking bugs`,
 
   projects: `⚡ SHASWATSHELL LIVE REPOSITORY INDEX:
-  1. NovaDL       : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
-  2. VoiceWave    : Peer-to-peer real-time browser voice chat app
-  3. We Plays     : Glassmorphic music player with lyrics & visualizer
-  4. JustPDFCraft : 100% Client-Side PDF Utilities Toolkit
-  5. ResumeAI     : AI-Powered Resume Builder with 30 Templates`,
+  1. NovaDL         : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
+  2. OmniDownloader : All-in-one multi-engine media downloader & creator studio
+  3. Bill Generator : Free bill & receipt generator with 30+ templates
+  4. VoiceWave      : Peer-to-peer real-time browser voice chat app
+  5. We Plays       : Glassmorphic music player with lyrics & visualizer
+  6. JustPDFCraft   : 100% Client-Side PDF Utilities Toolkit
+  7. ResumeAI       : AI-Powered Resume Builder with 30 Templates`,
 
   skills: `🛠️ CORE TECH STACK & ENGINE:
   • Languages  : JavaScript (ESNext), TypeScript, HTML5, CSS3, C++

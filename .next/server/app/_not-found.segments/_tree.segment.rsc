@@ -1,3 +1,3 @@
 :HL["/_next/static/chunks/0wsxngfz525il.css","style"]
 :HL["https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap","style"]
-0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"sVr0I3wqmzrvVmCeTtgp1"}
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"/_not-found","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"JswC0g2D0c04C7xT7eh3P"}

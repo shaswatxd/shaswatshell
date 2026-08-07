@@ -29,6 +29,26 @@ const PROJECTS = [
     }
   },
   {
+    name: "OmniDownloader",
+    desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
+    icon: "⚡",
+    glow: "magenta",
+    badge: "SITE",
+    githubUrl: "https://github.com/shaswatxd/omnidownloader",
+    liveUrl: "https://omnidownloader.vercel.app",
+    features: [
+      "⚡ Auto-Fallback Multi-Engine Stream Extraction",
+      "🎥 No Watermark HD Downloads (TikTok, YT, IG, Pinterest)",
+      "🎵 Spotify Song Search & MP3 Audio Extractor",
+      "☁️ Cloud Drive Unlocking (Terabox, MediaFire, Drive)",
+      "🔒 100% Free Client-Side & Server Sandbox Routing"
+    ],
+    details: {
+      architecture: "High-speed multi-engine extraction pipeline with dynamic failover routing, Spotify metadata resolver, YT-DLP/API worker proxies, and client-side download history.",
+      modules: ["Auto-Fallback Extraction Engine", "Spotify Metadata & Song Resolver", "Multi-Platform Media Parser", "Direct Cloud Drive Unlocker", "Client Download History Manager", "Interactive Creative Studio"]
+    }
+  },
+  {
     name: "Bill Generator",
     desc: "Instant free bill & receipt generator with 30+ professional templates. Create GST invoices, rent receipts, salary slips, fuel bills & more — export as high-res PDF or PNG in one click.",
     icon: "🧾",
