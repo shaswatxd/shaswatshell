@@ -35,7 +35,7 @@ const PROJECTS = [
     glow: "magenta",
     badge: "SITE",
     githubUrl: "https://github.com/shaswatxd/omnidownloader",
-    liveUrl: "https://omnidownloader.vercel.app",
+    liveUrl: "https://omnidownloader-one.vercel.app/",
     features: [
       "⚡ Auto-Fallback Multi-Engine Stream Extraction",
       "🎥 No Watermark HD Downloads (TikTok, YT, IG, Pinterest)",
