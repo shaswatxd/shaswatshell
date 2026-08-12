@@ -30,6 +30,25 @@ const PROJECTS = [
     }
   },
   {
+    name: "XD VPN",
+    desc: "Fast & reliable VPN utility designed to easily bypass gaming limits (like BGMI 6-hour restrictions) and unblock restricted websites smoothly in India.",
+    icon: "🛡️",
+    glow: "emerald",
+    badge: "SITE",
+    githubUrl: "https://github.com/shaswatxd/xdvpn",
+    liveUrl: "https://xdvpn.vercel.app",
+    features: [
+      "🎮 BGMI 6-Hour Play Limit Bypass",
+      "🌐 Unblocks Restrictive Sites & Games in India",
+      "⚡ Ultra Fast & Low Latency Gaming Routing",
+      "🔒 Private & Encrypted Connection Flow"
+    ],
+    details: {
+      architecture: "Lightweight web app and proxy/VPN solution tailored for bypassing network restrictions, play time limits, and accessing blocked websites.",
+      modules: ["Gaming Bypass Module", "Domain Unblocker Engine", "Latency Optimizer", "Encrypted Tunneling Route"]
+    }
+  },
+  {
     name: "OmniDownloader",
     desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
     icon: "⚡",
