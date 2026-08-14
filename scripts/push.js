@@ -1,5 +1,5 @@
 import { execSync } from 'child_process';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -10,6 +10,7 @@ const rootDir = resolve(__dirname, '..');
 function loadEnv() {
   try {
     const envPath = resolve(rootDir, '.env.local');
+    if (!existsSync(envPath)) return;
     const content = readFileSync(envPath, 'utf-8');
     for (const line of content.split('\n')) {
       const trimmed = line.trim();
@@ -32,8 +33,51 @@ function loadEnv() {
 
 loadEnv();
 
+// Automatic semantic patch version bumper
+function bumpVersion() {
+  try {
+    const pkgPath = resolve(rootDir, 'package.json');
+    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
+    const currentVersion = pkg.version || '0.0.0';
+    const parts = currentVersion.split('.').map(num => parseInt(num, 10) || 0);
+    
+    while (parts.length < 3) parts.push(0);
+    parts[2] += 1; // Increment patch version
+    
+    const newVersion = parts.join('.');
+    pkg.version = newVersion;
+    writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + '\n', 'utf-8');
+
+    // Also update package-lock.json version if present
+    try {
+      const pkgLockPath = resolve(rootDir, 'package-lock.json');
+      if (existsSync(pkgLockPath)) {
+        const pkgLock = JSON.parse(readFileSync(pkgLockPath, 'utf-8'));
+        pkgLock.version = newVersion;
+        if (pkgLock.packages && pkgLock.packages['']) {
+          pkgLock.packages[''].version = newVersion;
+        }
+        writeFileSync(pkgLockPath, JSON.stringify(pkgLock, null, 2) + '\n', 'utf-8');
+      }
+    } catch {
+      // Ignore package-lock errors
+    }
+
+    console.log(`🏷️ Bumped version: v${currentVersion} ➔ v${newVersion}`);
+    return newVersion;
+  } catch (err) {
+    console.warn(`⚠️ Could not bump version: ${err.message}`);
+    return null;
+  }
+}
+
+const newVersion = bumpVersion();
+
 // Get commit message from command line arguments, default to 'auto update'
-const commitMessage = process.argv.slice(2).join(' ') || 'auto update';
+const userArgs = process.argv.slice(2).join(' ').trim();
+const commitMessage = userArgs 
+  ? `${userArgs}${newVersion ? ` (v${newVersion})` : ''}` 
+  : (newVersion ? `update: release v${newVersion}` : 'auto update');
 
 try {
   console.log('📦 Staging changes...');
@@ -72,7 +116,7 @@ try {
     execSync('npx vercel --prod --yes', { stdio: 'inherit', cwd: rootDir });
   }
 
-  console.log('✨ All done! Project is updated and deployed.');
+  console.log(`✨ All done! Project (v${newVersion || 'latest'}) is updated and deployed.`);
 } catch (error) {
   console.error('❌ An error occurred:', error.message);
   process.exit(1);

@@ -30,22 +30,24 @@ const PROJECTS = [
     }
   },
   {
-    name: "XD VPN",
-    desc: "Fast & reliable VPN utility designed to easily bypass gaming limits (like BGMI 6-hour restrictions) and unblock restricted websites smoothly in India.",
+    name: "xdVpn",
+    desc: "Production-grade, low-latency, no-root Android firewall & network control engine with per-app network control, Radix Trie ad/tracker blocking, gaming network optimization, and direct in-app auto-updates.",
     icon: "🛡️",
     glow: "emerald",
-    badge: "SITE",
+    badge: "APP",
     githubUrl: "https://github.com/shaswatxd/xdvpn",
-    liveUrl: "https://xdvpn.vercel.app",
+    liveUrl: "https://xdvpn-website.vercel.app/",
     features: [
-      "🎮 BGMI 6-Hour Play Limit Bypass",
-      "🌐 Unblocks Restrictive Sites & Games in India",
-      "⚡ Ultra Fast & Low Latency Gaming Routing",
-      "🔒 Private & Encrypted Connection Flow"
+      "🛡️ No-Root VpnService Architecture (100% Local Loopback TUN)",
+      "⚡ In-Memory Radix Trie Ad & Tracker Shield (O(K) Domain Blocking)",
+      "🎮 Ultra-Low Latency Gaming Mode (<95 µs Engine Latency)",
+      "📱 Per-App Network Rules (Wi-Fi/Cellular & Focus Timers)",
+      "🚀 In-App Direct Auto-Updater (Direct APK Downloads)",
+      "📊 Live Connection Monitor & Auditing (SQLite Persistence & Export)"
     ],
     details: {
-      architecture: "Lightweight web app and proxy/VPN solution tailored for bypassing network restrictions, play time limits, and accessing blocked websites.",
-      modules: ["Gaming Bypass Module", "Domain Unblocker Engine", "Latency Optimizer", "Encrypted Tunneling Route"]
+      architecture: "Engineered on Android's native VpnService local loopback TUN interface with zero cloud dependencies. Integrates high-performance Radix Trie domain filtering for instantaneous NXDOMAIN blocking, zero-copy buffer routing for gaming packet priority, SQLite connection logging, and standalone APK auto-update pipeline.",
+      modules: ["No-Root VpnService TUN Engine", "Radix Trie Domain Blocker", "Low-Latency Gaming Optimizer", "Per-App Rule Controller", "Live Socket Audit & SQLite Logger", "In-App APK Auto-Updater"]
     }
   },
   {

@@ -35,7 +35,7 @@ currently : Shipping software, writing code & breaking bugs`,
 
   projects: `⚡ SHASWATSHELL LIVE REPOSITORY INDEX:
   1. NovaDL         : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
-  2. XD VPN         : Fast VPN utility (BGMI 6-hr limit bypass & blocked sites unblocker in India)
+  2. xdVpn          : Production-Grade No-Root Android Firewall & Network Control Engine
   3. OmniDownloader : All-in-one multi-engine media downloader & creator studio
   4. Bill Generator : Free bill & receipt generator with 30+ templates
   5. VoiceWave      : Peer-to-peer real-time browser voice chat app
