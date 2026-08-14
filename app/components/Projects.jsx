@@ -29,27 +29,7 @@ const PROJECTS = [
       modules: ["Worker-Thread Download Engine", "Android APK & Desktop Runtime", "HLS Stream Parser & Assembler", "WASM SQLite Persistence Layer", "Manifest V3 Extension Bridge", "Task Scheduler & Speed Limiter"]
     }
   },
-  {
-    name: "xdVpn",
-    desc: "Production-grade, low-latency, no-root Android firewall & network control engine with per-app network control, Radix Trie ad/tracker blocking, gaming network optimization, and direct in-app auto-updates.",
-    icon: "🛡️",
-    glow: "emerald",
-    badge: "APP",
-    githubUrl: "https://github.com/shaswatxd/xdvpn",
-    liveUrl: "https://xdvpn-website.vercel.app/",
-    features: [
-      "🛡️ No-Root VpnService Architecture (100% Local Loopback TUN)",
-      "⚡ In-Memory Radix Trie Ad & Tracker Shield (O(K) Domain Blocking)",
-      "🎮 Ultra-Low Latency Gaming Mode (<95 µs Engine Latency)",
-      "📱 Per-App Network Rules (Wi-Fi/Cellular & Focus Timers)",
-      "🚀 In-App Direct Auto-Updater (Direct APK Downloads)",
-      "📊 Live Connection Monitor & Auditing (SQLite Persistence & Export)"
-    ],
-    details: {
-      architecture: "Engineered on Android's native VpnService local loopback TUN interface with zero cloud dependencies. Integrates high-performance Radix Trie domain filtering for instantaneous NXDOMAIN blocking, zero-copy buffer routing for gaming packet priority, SQLite connection logging, and standalone APK auto-update pipeline.",
-      modules: ["No-Root VpnService TUN Engine", "Radix Trie Domain Blocker", "Low-Latency Gaming Optimizer", "Per-App Rule Controller", "Live Socket Audit & SQLite Logger", "In-App APK Auto-Updater"]
-    }
-  },
+
   {
     name: "OmniDownloader",
     desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
