@@ -32,21 +32,23 @@ const PROJECTS = [
 
   {
     name: "We Plays",
-    desc: "Premium glassmorphic desktop music player with a built-in visualizer, synchronized lyrics, custom playlist management, and automatic ID3 metadata fetching.",
+    desc: "Premium glassmorphic desktop music player & offline hub. Search & stream from YouTube Music, download high-bitrate audio (MP3/FLAC up to 320kbps), build custom playlists, extract dynamic album-art themes, and sync across devices with Google login.",
     icon: "🎵",
     glow: "emerald",
     badge: "APP",
     githubUrl: "https://github.com/shaswatxd/we-plays",
     liveUrl: "https://weplays.vercel.app",
     features: [
-      "🎨 Dynamic Album Art Theme Engine",
-      "🎤 Synchronized Lyrics & Insights",
-      "🎛️ Custom Playlist & Queue Manager",
-      "🏷️ Automatic ID3 Metadata Fetching"
+      "📥 In-App YouTube & YT Music Search & Audio Downloader",
+      "🎶 Custom Playlist Builder, Liked Songs & Smart Queue",
+      "💽 Lossless & High-Res Formats (MP3, FLAC, AAC, OGG up to 320kbps)",
+      "🎨 Dynamic Album Art Color-Extraction Theme Engine",
+      "☁️ Optional Google Cloud Sync for Playlists & Favorites",
+      "🎤 Synchronized Lyrics, Insights Dashboard & ID3 Tagger"
     ],
     details: {
-      architecture: "Desktop app built on Electron with a rich audio engine, real-time lyrics sync, and automatic metadata tagging.",
-      modules: ["Electron IPC broker", "Web Audio visualizer", "Lyric scraper engine", "ID3 metadata tagger"]
+      architecture: "Desktop app built with Electron, React, Vite, SQLite, and Howler.js. Features yt-dlp & FFmpeg audio extraction pipeline, Firebase cloud sync, and dynamic color extraction.",
+      modules: ["YouTube Stream & Download Pipeline", "Playlist & Smart Queue Manager", "Dynamic Album Art Theming", "Howler.js Audio Engine", "Firebase Cloud Sync & SQLite Store", "ID3 Tagging & Lyric Scraper"]
     }
   },
 
