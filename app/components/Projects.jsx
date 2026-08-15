@@ -32,7 +32,7 @@ const PROJECTS = [
 
   {
     name: "We Plays",
-    desc: "Premium glassmorphic desktop music player & offline hub. Search & stream online tracks, download high-bitrate audio (MP3/FLAC up to 320kbps), build custom playlists, extract dynamic album-art themes, and sync across devices with Google login.",
+    desc: "Premium glassmorphic desktop music player & offline hub. Search & stream online tracks, download high-bitrate audio (MP3/FLAC up to 320kbps), build custom playlists, extract dynamic album-art themes, and sync across devices seamlessly.",
     icon: "🎵",
     glow: "emerald",
     badge: "APP",
@@ -43,12 +43,12 @@ const PROJECTS = [
       "🎶 Custom Playlist Builder, Liked Songs & Smart Queue",
       "💽 Lossless & High-Res Formats (MP3, FLAC, AAC, OGG up to 320kbps)",
       "🎨 Dynamic Album Art Color-Extraction Theme Engine",
-      "☁️ Optional Google Cloud Sync for Playlists & Favorites",
+      "☁️ Cross-Device Cloud Sync for Playlists & Favorites",
       "🎤 Synchronized Lyrics, Insights Dashboard & ID3 Tagger"
     ],
     details: {
-      architecture: "Desktop app built with Electron, React, Vite, SQLite, and Howler.js. Features high-speed stream extraction pipeline, Firebase cloud sync, and dynamic color extraction.",
-      modules: ["Online Stream & Download Engine", "Playlist & Smart Queue Manager", "Dynamic Album Art Theming", "Howler.js Audio Engine", "Firebase Cloud Sync & SQLite Store", "ID3 Tagging & Lyric Scraper"]
+      architecture: "Desktop app built with Electron, React, Vite, SQLite, and Howler.js. Features high-speed audio extraction pipeline, cloud sync, and dynamic color extraction.",
+      modules: ["Online Stream & Download Engine", "Playlist & Smart Queue Manager", "Dynamic Album Art Theming", "Howler.js Audio Engine", "Cloud Sync & SQLite Store", "ID3 Tagging & Lyric Scraper"]
     }
   },
 
