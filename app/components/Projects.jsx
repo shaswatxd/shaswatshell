@@ -31,10 +31,53 @@ const PROJECTS = [
   },
 
   {
+    name: "We Plays",
+    desc: "Premium glassmorphic desktop music player with a built-in visualizer, synchronized lyrics, custom playlist management, and automatic ID3 metadata fetching.",
+    icon: "🎵",
+    glow: "emerald",
+    badge: "APP",
+    githubUrl: "https://github.com/shaswatxd/we-plays",
+    liveUrl: "https://weplays.vercel.app",
+    features: [
+      "🎨 Dynamic Album Art Theme Engine",
+      "🎤 Synchronized Lyrics & Insights",
+      "🎛️ Custom Playlist & Queue Manager",
+      "🏷️ Automatic ID3 Metadata Fetching"
+    ],
+    details: {
+      architecture: "Desktop app built on Electron with a rich audio engine, real-time lyrics sync, and automatic metadata tagging.",
+      modules: ["Electron IPC broker", "Web Audio visualizer", "Lyric scraper engine", "ID3 metadata tagger"]
+    }
+  },
+
+  {
+    name: "BirthdayMagic",
+    desc: "Interactive celebration & mystery surprise experience platform. Features a 3-step creator studio, 12 dynamic aesthetic themes, real voice note recording, candle blowing & cake slicing simulation, scratch-to-reveal coupons, and zero-database URL state encoding.",
+    icon: "🎁",
+    glow: "magenta",
+    badge: "SITE",
+    githubUrl: "https://github.com/shaswatxd/special-surprise-box",
+    liveUrl: "https://special-surprise-box.vercel.app/",
+    features: [
+      "✨ 4-Stage Interactive Story (Wax Seal, 3D Cake, Confetti, Keepsake Card)",
+      "🎂 Real Candle Blowing & Cake Slicing Physics Simulation",
+      "🎙️ In-Browser Voice Note Recording & Equalizer Player",
+      "🎟️ Interactive Scratch-to-Reveal Gift Coupon & Polaroid Gallery",
+      "🎭 Stealth Mystery Disguise Link Mode with Custom WhatsApp Previews",
+      "⏳ Midnight Countdown Lock & Secret Passcode Protection",
+      "🔒 100% Client-Side LZ-String State Compression (Zero Database)"
+    ],
+    details: {
+      architecture: "100% Client-side interactive canvas & animation pipeline. Encodes complete multimedia state, voice recordings, and customized settings into URL hashes using LZ-String compression with html2canvas keepsake generation.",
+      modules: ["Interactive 4-Stage Story Engine", "3D Wax Seal & Cake Physics", "Web Audio Voice Note Recorder", "LZ-String URL Compression", "HTML5 Canvas Confetti & FX", "Passcode & Midnight Lock System"]
+    }
+  },
+
+  {
     name: "OmniDownloader",
     desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
     icon: "⚡",
-    glow: "magenta",
+    glow: "cyan",
     badge: "SITE",
     githubUrl: "https://github.com/shaswatxd/omnidownloader",
     liveUrl: "https://omnidownloader-one.vercel.app/",
@@ -70,6 +113,7 @@ const PROJECTS = [
       modules: ["Template Engine & Category System", "PDF & PNG Export Pipeline", "Saved Drafts Manager", "Search & Filter Controller"]
     }
   },
+
   {
     name: "VoiceWave",
     desc: "Real-time voice chat app that works directly in your browser. No account needed, no downloads — just share a room link and start talking instantly.",
@@ -89,25 +133,7 @@ const PROJECTS = [
       modules: ["PeerJS connection engine", "Web Audio API nodes", "Secure signaling sockets", "Offline cache database"]
     }
   },
-  {
-    name: "We Plays",
-    desc: "Premium glassmorphic desktop music player with a built-in visualizer, synchronized lyrics, custom playlist management, and automatic ID3 metadata fetching.",
-    icon: "🎵",
-    glow: "emerald",
-    badge: "APP",
-    githubUrl: "https://github.com/shaswatxd/we-plays",
-    liveUrl: "https://weplays.vercel.app",
-    features: [
-      "🎨 Dynamic Album Art Theme Engine",
-      "🎤 Synchronized Lyrics & Insights",
-      "🎛️ Custom Playlist & Queue Manager",
-      "🏷️ Automatic ID3 Metadata Fetching"
-    ],
-    details: {
-      architecture: "Desktop app built on Electron with a rich audio engine, real-time lyrics sync, and automatic metadata tagging.",
-      modules: ["Electron IPC broker", "Web Audio visualizer", "Lyric scraper engine", "ID3 metadata tagger"]
-    }
-  },
+
   {
     name: "JustPDFCraft",
     desc: "Browser-based client-side PDF utility toolkit to merge, split, compress, watermark, protect, and annotate documents locally.",
@@ -126,6 +152,7 @@ const PROJECTS = [
       modules: ["pdf-lib compiler", "PDF.js parser", "Local browser memory stream"]
     }
   },
+
   {
     name: "ResumeAI",
     desc: "AI-powered resume builder that creates professional resumes from a simple text description. Choose from 30 templates and export as PDF instantly.",
