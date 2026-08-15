@@ -35,7 +35,7 @@ currently : Shipping software, writing code & breaking bugs`,
 
   projects: `⚡ SHASWATSHELL LIVE REPOSITORY INDEX:
   1. NovaDL         : Multi-threaded Download Manager for Windows & Android (APK) with HLS Support
-  2. We Plays       : Desktop music player with built-in YouTube downloader, custom playlists & lyrics
+  2. We Plays       : Desktop music player with in-app audio downloader, custom playlists & lyrics
   3. BirthdayMagic  : Interactive 3D surprise experience, candle blowing & celebration studio
   4. OmniDownloader : All-in-one multi-engine media downloader & creator studio
   5. Bill Generator : Free bill & receipt generator with 30+ templates
