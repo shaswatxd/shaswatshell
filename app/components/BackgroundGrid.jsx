@@ -5,7 +5,7 @@ import CyberConstellation from './CyberConstellation';
 
 export default function BackgroundGrid() {
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 select-none">
+    <div className="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
       {/* Interactive 2D Cyber Constellation Particle Canvas */}
       <CyberConstellation />
       {/* Cyber Grid Lines */}

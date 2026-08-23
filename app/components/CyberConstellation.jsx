@@ -12,34 +12,36 @@ export default function CyberConstellation() {
     if (!ctx) return;
 
     let animationFrameId;
-    let width = 0;
-    let height = 0;
+    let width = window.innerWidth;
+    let height = window.innerHeight;
     let isVisible = true;
 
-    // Handle high-performance resize
+    // Crisp high-DPI scaling
     const handleResize = () => {
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
 
     // Node particle configuration
-    const isMobile = window.innerWidth < 768;
-    const nodeCount = isMobile 
-      ? Math.min(30, Math.floor(window.innerWidth / 14)) 
-      : Math.min(55, Math.floor(window.innerWidth / 28));
+    const isMobile = width < 768;
+    const nodeCount = isMobile ? 32 : 65;
 
     const colors = ['#00c2d1', '#8b6bff', '#ff3d9a', '#00f0ff'];
 
     const nodes = Array.from({ length: nodeCount }, () => ({
-      x: Math.random() * (width || window.innerWidth),
-      y: Math.random() * (height || window.innerHeight),
-      vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
-      vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.45),
-      radius: Math.random() * 2 + 1.2,
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
+      vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
+      radius: Math.random() * 2.2 + 1.8,
       color: colors[Math.floor(Math.random() * colors.length)],
-      alpha: Math.random() * 0.45 + 0.3,
+      alpha: Math.random() * 0.4 + 0.5,
     }));
 
     // Mouse / Touch cursor tracking
@@ -71,7 +73,7 @@ export default function CyberConstellation() {
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
-    // Handle tab visibility to sleep render loop when inactive
+    // Pause animation when tab is inactive to save battery
     const handleVisibilityChange = () => {
       isVisible = document.visibilityState !== 'hidden';
       if (isVisible) {
@@ -80,32 +82,32 @@ export default function CyberConstellation() {
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    const maxLinkDistance = isMobile ? 100 : 135;
+    const maxLinkDistance = isMobile ? 110 : 155;
 
     const render = () => {
       if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
-      // Subtle ambient cyber glows in background
+      // Render vibrant cyber ambient backdrops
       const ambient1 = ctx.createRadialGradient(
-        width * 0.45, height * 0.25, 10,
-        width * 0.45, height * 0.25, width * 0.65
+        width * 0.5, height * 0.3, 10,
+        width * 0.5, height * 0.3, width * 0.65
       );
-      ambient1.addColorStop(0, 'rgba(0, 194, 209, 0.065)');
+      ambient1.addColorStop(0, 'rgba(0, 194, 209, 0.08)');
       ambient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = ambient1;
       ctx.fillRect(0, 0, width, height);
 
       const ambient2 = ctx.createRadialGradient(
-        width * 0.75, height * 0.65, 10,
-        width * 0.75, height * 0.65, width * 0.55
+        width * 0.8, height * 0.65, 10,
+        width * 0.8, height * 0.65, width * 0.55
       );
-      ambient2.addColorStop(0, 'rgba(139, 107, 255, 0.055)');
+      ambient2.addColorStop(0, 'rgba(139, 107, 255, 0.07)');
       ambient2.addColorStop(1, 'rgba(0, 0, 0, 0)');
       ctx.fillStyle = ambient2;
       ctx.fillRect(0, 0, width, height);
 
-      // Draw laser links between nearby constellation nodes
+      // Draw glowing laser links between nearby constellation nodes
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -116,9 +118,9 @@ export default function CyberConstellation() {
             ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            const lineAlpha = (1 - dist / maxLinkDistance) * 0.2;
+            const lineAlpha = (1 - dist / maxLinkDistance) * 0.35;
             ctx.strokeStyle = `rgba(0, 194, 209, ${lineAlpha})`;
-            ctx.lineWidth = 0.75;
+            ctx.lineWidth = 1.0;
             ctx.stroke();
           }
         }
@@ -128,21 +130,21 @@ export default function CyberConstellation() {
       for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
 
-        // Soft magnetic drift towards cursor if nearby
+        // Magnetic attraction towards cursor if close
         if (isCursorActive) {
           const cdx = cursorX - node.x;
           const cdy = cursorY - node.y;
           const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
-          if (cdist < 150 && cdist > 5) {
-            node.x += (cdx / cdist) * 0.22;
-            node.y += (cdy / cdist) * 0.22;
+          if (cdist < 180 && cdist > 5) {
+            node.x += (cdx / cdist) * 0.35;
+            node.y += (cdy / cdist) * 0.35;
           }
         }
 
         node.x += node.vx;
         node.y += node.vy;
 
-        // Bounce gently off edges
+        // Bounce smoothly off boundaries
         if (node.x < 0 || node.x > width) node.vx *= -1;
         if (node.y < 0 || node.y > height) node.vy *= -1;
 
@@ -152,7 +154,7 @@ export default function CyberConstellation() {
         ctx.fillStyle = node.color;
         ctx.globalAlpha = node.alpha;
         ctx.shadowColor = node.color;
-        ctx.shadowBlur = 6;
+        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.shadowBlur = 0;
         ctx.globalAlpha = 1.0;
@@ -177,6 +179,7 @@ export default function CyberConstellation() {
     <canvas
       ref={canvasRef}
       className="fixed inset-0 w-full h-full pointer-events-none select-none z-0"
+      style={{ width: '100vw', height: '100vh' }}
     />
   );
 }
