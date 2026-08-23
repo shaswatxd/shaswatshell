@@ -134,25 +134,42 @@
   }
 }
 
-/* Aurora Mesh Gradient Keyframes */
-@keyframes auroraBlob1 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(80px, -50px, 0) scale(1.15); }
+/* Marquee & Utility Keyframes */
+@keyframes marqueeScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
-@keyframes auroraBlob2 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(-70px, 60px, 0) scale(1.1); }
+@keyframes scrollBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
 }
 
-@keyframes auroraBlob3 {
-  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
-  50%      { transform: translate3d(50px, -60px, 0) scale(1.2); }
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-.animate-aurora-blob1 { animation: auroraBlob1 18s ease-in-out infinite; }
-.animate-aurora-blob2 { animation: auroraBlob2 22s ease-in-out infinite; }
-.animate-aurora-blob3 { animation: auroraBlob3 25s ease-in-out infinite; }
+.animate-marquee {
+  animation: marqueeScroll 45s linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marqueeScroll 45s linear infinite reverse;
+}
+
 
 /* Glassmorphism Panel Utilities */
 .glass-panel {

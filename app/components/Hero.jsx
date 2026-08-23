@@ -2,13 +2,6 @@
 
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import dynamic from 'next/dynamic';
-
-// Dynamic SSR-free import for WebGL Canvas
-const Hero3D = dynamic(() => import('./Hero3D'), { 
-  ssr: false,
-  loading: () => null
-});
 
 // Magnetic Wrapper for Interactive Buttons
 function MagneticButton({ children }) {
@@ -115,9 +108,6 @@ const Hero = React.memo(function Hero() {
       initial="hidden"
       animate="visible"
     >
-      {/* Ambient HD 3D Cyber Cosmos Full Background */}
-      <Hero3D />
-
       {/* Typography & CTAs Layer (z-10 relative) */}
       <div className="relative z-10 max-w-3xl">
         {/* Main Heading with Word-Safe Letter-by-Letter Animation & Hover Bounce */}
