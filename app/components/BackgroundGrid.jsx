@@ -1,10 +1,13 @@
 "use client";
 
 import React from 'react';
+import CyberConstellation from './CyberConstellation';
 
 export default function BackgroundGrid() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10 select-none">
+      {/* Interactive 2D Cyber Constellation Particle Canvas */}
+      <CyberConstellation />
       {/* Cyber Grid Lines */}
       <div 
         className="absolute inset-0 opacity-[0.04] dark:opacity-[0.07] bg-[linear-gradient(to_right,#0a0a0a_1px,transparent_1px),linear-gradient(to_bottom,#0a0a0a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:60px_60px]" 
