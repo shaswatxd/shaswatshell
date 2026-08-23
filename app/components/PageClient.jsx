@@ -40,7 +40,7 @@ function Preloader({ onComplete }) {
   useEffect(() => {
     let timer;
     const startTime = Date.now();
-    const duration = 2100; // 2.1 seconds loading animation time
+    const duration = 400; // Ultra-fast boot load time
 
     const tick = () => {
       const elapsed = Date.now() - startTime;
@@ -269,9 +269,10 @@ const PageClient = React.memo(function PageClient() {
         <Navigation />
         <Hero />
         <StatsStrip />
-        <WhatIBuild />
         <SectionDivider />
         <Projects />
+        <SectionDivider />
+        <WhatIBuild />
         <Marquee />
         <TechStack />
         <Terminal />

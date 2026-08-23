@@ -81,11 +81,22 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #d4d4d4;
   }
-  .dark ::-webkit-scrollbar-thumb {
-    background: #333333;
-  }
   .dark ::-webkit-scrollbar-thumb:hover {
     background: #444444;
+  }
+
+  /* Cyber Blueprint Grid Pattern */
+  .bg-cyber-grid {
+    background-size: 44px 44px;
+    background-image: 
+      linear-gradient(to right, rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  }
+
+  .dark .bg-cyber-grid {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
   }
 
   ::selection {
@@ -162,15 +173,48 @@
   }
 }
 
+@keyframes projectMarqueeScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 .animate-marquee {
-  animation: marqueeScroll 45s linear infinite;
+  display: flex !important;
+  width: max-content !important;
+  animation: marqueeScroll 45s linear infinite !important;
   will-change: transform;
 }
 
 .animate-marquee-reverse {
-  animation: marqueeScroll 45s linear infinite reverse;
+  display: flex !important;
+  width: max-content !important;
+  animation: marqueeScroll 45s linear infinite reverse !important;
   will-change: transform;
 }
+
+.project-marquee {
+  display: flex !important;
+  width: max-content !important;
+  animation: marqueeScroll 25s linear infinite !important;
+  will-change: transform;
+}
+
+.project-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (max-width: 768px) {
+  .project-marquee {
+    animation: marqueeScroll 18s linear infinite !important;
+  }
+}
+
+
+
 
 /* ─────────────────────────────────────────────────────────────────────────────
    Hardware Acceleration & Paint Isolation (Max 120Hz/60Hz FPS Lock)
