@@ -164,11 +164,31 @@
 
 .animate-marquee {
   animation: marqueeScroll 45s linear infinite;
+  will-change: transform;
 }
 
 .animate-marquee-reverse {
   animation: marqueeScroll 45s linear infinite reverse;
+  will-change: transform;
 }
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   Hardware Acceleration & Paint Isolation (Max 120Hz/60Hz FPS Lock)
+───────────────────────────────────────────────────────────────────────────── */
+.card,
+.glass-panel,
+.nav-link,
+.animate-section {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.animate-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+}
+
 
 
 /* Glassmorphism Panel Utilities */

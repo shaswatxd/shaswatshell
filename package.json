@@ -1,7 +1,7 @@
 {
   "name": "shaswatshell",
   "private": true,
-  "version": "0.0.11",
+  "version": "0.0.12",
   "type": "module",
   "scripts": {
     "dev": "next dev -H 0.0.0.0",

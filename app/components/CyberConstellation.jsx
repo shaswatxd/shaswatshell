@@ -8,7 +8,7 @@ export default function CyberConstellation() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true });
     if (!ctx) return;
 
     let animationFrameId;
@@ -16,7 +16,7 @@ export default function CyberConstellation() {
     let height = window.innerHeight;
     let isVisible = true;
 
-    // Crisp high-DPI scaling
+    // High-DPI scaling
     const handleResize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       width = window.innerWidth;
@@ -28,23 +28,23 @@ export default function CyberConstellation() {
     handleResize();
     window.addEventListener('resize', handleResize, { passive: true });
 
-    // Node particle configuration
+    // Node configuration
     const isMobile = width < 768;
-    const nodeCount = isMobile ? 32 : 65;
+    const nodeCount = isMobile ? 28 : 55;
 
     const colors = ['#00c2d1', '#8b6bff', '#ff3d9a', '#00f0ff'];
 
     const nodes = Array.from({ length: nodeCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
-      vx: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
-      vy: (Math.random() - 0.5) * (isMobile ? 0.35 : 0.55),
-      radius: Math.random() * 2.2 + 1.8,
+      vx: (Math.random() - 0.5) * (isMobile ? 0.3 : 0.45),
+      vy: (Math.random() - 0.5) * (isMobile ? 0.3 : 0.45),
+      radius: Math.random() * 2.0 + 1.8,
       color: colors[Math.floor(Math.random() * colors.length)],
       alpha: Math.random() * 0.4 + 0.5,
     }));
 
-    // Mouse / Touch cursor tracking
+    // Cursor tracking
     let cursorX = -1000;
     let cursorY = -1000;
     let isCursorActive = false;
@@ -73,7 +73,7 @@ export default function CyberConstellation() {
     window.addEventListener('touchmove', handleTouchMove, { passive: true });
     window.addEventListener('mouseleave', handleMouseLeave, { passive: true });
 
-    // Pause animation when tab is inactive to save battery
+    // Sleep when tab is hidden
     const handleVisibilityChange = () => {
       isVisible = document.visibilityState !== 'hidden';
       if (isVisible) {
@@ -82,16 +82,16 @@ export default function CyberConstellation() {
     };
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
-    const maxLinkDistance = isMobile ? 110 : 155;
+    const maxLinkDistance = isMobile ? 100 : 145;
 
     const render = () => {
       if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
 
-      // Render vibrant cyber ambient backdrops
+      // Subtle ambient cyber backdrops
       const ambient1 = ctx.createRadialGradient(
-        width * 0.5, height * 0.3, 10,
-        width * 0.5, height * 0.3, width * 0.65
+        width * 0.45, height * 0.25, 10,
+        width * 0.45, height * 0.25, width * 0.65
       );
       ambient1.addColorStop(0, 'rgba(0, 194, 209, 0.08)');
       ambient1.addColorStop(1, 'rgba(0, 0, 0, 0)');
@@ -107,7 +107,11 @@ export default function CyberConstellation() {
       ctx.fillStyle = ambient2;
       ctx.fillRect(0, 0, width, height);
 
-      // Draw glowing laser links between nearby constellation nodes
+      // ─── BATCHED LASER LINK RENDERING (Single GPU draw call) ─────────────
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(0, 194, 209, 0.25)';
+      ctx.lineWidth = 0.85;
+
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x;
@@ -115,50 +119,44 @@ export default function CyberConstellation() {
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < maxLinkDistance) {
-            ctx.beginPath();
             ctx.moveTo(nodes[i].x, nodes[i].y);
             ctx.lineTo(nodes[j].x, nodes[j].y);
-            const lineAlpha = (1 - dist / maxLinkDistance) * 0.35;
-            ctx.strokeStyle = `rgba(0, 194, 209, ${lineAlpha})`;
-            ctx.lineWidth = 1.0;
-            ctx.stroke();
           }
         }
       }
+      ctx.stroke();
 
-      // Update and draw floating nodes
+      // ─── UPDATE & RENDER NODES ──────────────────────────────────────────
       for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
 
-        // Magnetic attraction towards cursor if close
         if (isCursorActive) {
           const cdx = cursorX - node.x;
           const cdy = cursorY - node.y;
           const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
-          if (cdist < 180 && cdist > 5) {
-            node.x += (cdx / cdist) * 0.35;
-            node.y += (cdy / cdist) * 0.35;
+          if (cdist < 170 && cdist > 5) {
+            node.x += (cdx / cdist) * 0.3;
+            node.y += (cdy / cdist) * 0.3;
           }
         }
 
         node.x += node.vx;
         node.y += node.vy;
 
-        // Bounce smoothly off boundaries
         if (node.x < 0 || node.x > width) node.vx *= -1;
         if (node.y < 0 || node.y > height) node.vy *= -1;
 
-        // Render glowing circular node
         ctx.beginPath();
         ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
         ctx.globalAlpha = node.alpha;
         ctx.shadowColor = node.color;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 6;
         ctx.fill();
-        ctx.shadowBlur = 0;
-        ctx.globalAlpha = 1.0;
       }
+
+      ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1.0;
 
       animationFrameId = requestAnimationFrame(render);
     };

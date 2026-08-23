@@ -45,19 +45,38 @@ const Navigation = React.memo(function Navigation() {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+    let isScrolledRef = false;
+    let isVisibleRef = true;
+    let ticking = false;
 
-    const handleScroll = () => {
+    const onScroll = () => {
       const currentScrollY = window.scrollY;
-      setScrolled(currentScrollY > 20);
+      const nextScrolled = currentScrollY > 20;
+      const nextVisible = !(currentScrollY > lastScrollY && currentScrollY > 90);
 
-      // Hide on scroll down, show on scroll up
-      if (currentScrollY > lastScrollY && currentScrollY > 90) {
-        setVisible(false);
-      } else {
-        setVisible(true);
+      if (nextScrolled !== isScrolledRef) {
+        isScrolledRef = nextScrolled;
+        setScrolled(nextScrolled);
+      }
+
+      if (nextVisible !== isVisibleRef) {
+        isVisibleRef = nextVisible;
+        setVisible(nextVisible);
+      }
+
+      if (currentScrollY < 150) {
+        setActiveSection((prev) => (prev !== "" ? "" : prev));
       }
 
       lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    const handleScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(onScroll);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -87,17 +106,8 @@ const Navigation = React.memo(function Navigation() {
       if (el) observer.observe(el);
     });
 
-    // Reset indicator if at the top of the page
-    const handleTopReset = () => {
-      if (window.scrollY < 150) {
-        setActiveSection("");
-      }
-    };
-    window.addEventListener('scroll', handleTopReset, { passive: true });
-
     return () => {
       observer.disconnect();
-      window.removeEventListener('scroll', handleTopReset);
     };
   }, []);
 
