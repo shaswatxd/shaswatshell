@@ -191,7 +191,7 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
       onClick={() => {
         onOpenDetails(project);
       }}
-      className={`card spotlight-card backdrop-blur-md p-8 flex flex-col cursor-pointer group relative overflow-hidden transition-all duration-300 ${project.featured ? 'card-featured' : ''} ${borderClasses}`}
+      className={`card spotlight-card bg-white/95 dark:bg-[#0c0c10]/95 p-8 flex flex-col cursor-pointer group relative overflow-hidden transition-all duration-300 ${project.featured ? 'card-featured' : ''} ${borderClasses}`}
       style={{
         transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
         transition: tilt.x === 0 ? "transform 0.5s ease-out" : "none"

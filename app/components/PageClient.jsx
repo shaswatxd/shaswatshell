@@ -180,11 +180,11 @@ const PageClient = React.memo(function PageClient() {
     if (!mq.matches) {
       // Initialize Lenis smooth scroll with responsive 60/120Hz gliding
       lenis = new Lenis({
-        duration: 0.95,
+        duration: 0.75,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         smoothWheel: true,
-        wheelMultiplier: 1.0,
-        touchMultiplier: 1.1,
+        wheelMultiplier: 0.95,
+        touchMultiplier: 1.0,
         syncTouch: false,
       });
 
@@ -196,7 +196,7 @@ const PageClient = React.memo(function PageClient() {
         lenis.raf(time * 1000);
       };
       gsap.ticker.add(updateLenis);
-      gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(500, 33);
 
       // Route in-page anchor links (#projects, #contact, etc.) through Lenis so
       // clicking a link doesn't kick off a second, competing native smooth-scroll.
