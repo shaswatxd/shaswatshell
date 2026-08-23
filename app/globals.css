@@ -520,6 +520,129 @@
   opacity: 1;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   Dynamic Moving Cyber Background Animations (.aurora-orb & .cyber-scanline)
+───────────────────────────────────────────────────────────────────────────── */
+
+.aurora-orb {
+  will-change: transform;
+  pointer-events: none;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  contain: paint;
+}
+
+.aurora-cyan {
+  animation: float-aurora-1 18s ease-in-out infinite alternate;
+}
+
+.aurora-violet {
+  animation: float-aurora-2 22s ease-in-out infinite alternate;
+}
+
+.aurora-emerald {
+  animation: float-aurora-3 26s ease-in-out infinite alternate;
+}
+
+.aurora-blue {
+  animation: float-aurora-4 20s ease-in-out infinite alternate;
+}
+
+@keyframes float-aurora-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate3d(80px, 60px, 0) scale(1.15) rotate(15deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(-50px, 120px, 0) scale(0.92) rotate(-10deg);
+    opacity: 0.75;
+  }
+}
+
+@keyframes float-aurora-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-90px, 90px, 0) scale(1.2) rotate(-20deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(60px, 40px, 0) scale(0.95) rotate(15deg);
+    opacity: 0.8;
+  }
+}
+
+@keyframes float-aurora-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate3d(100px, -70px, 0) scale(1.25);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate3d(-80px, 50px, 0) scale(0.9);
+    opacity: 0.7;
+  }
+}
+
+@keyframes float-aurora-4 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translate3d(-70px, -80px, 0) scale(1.18);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(50px, -40px, 0) scale(0.95);
+    opacity: 0.65;
+  }
+}
+
+/* Cyber Scanning Line Beam */
+.cyber-scanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(0, 194, 209, 0.4) 30%, rgba(139, 107, 255, 0.7) 50%, rgba(0, 194, 209, 0.4) 70%, transparent 100%);
+  box-shadow: 0 0 15px rgba(0, 194, 209, 0.5), 0 0 30px rgba(139, 107, 255, 0.3);
+  animation: cyber-scan 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.dark .cyber-scanline {
+  opacity: 0.75;
+}
+
+@keyframes cyber-scan {
+  0% {
+    top: -5%;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.7;
+  }
+  100% {
+    top: 105%;
+    opacity: 0;
+  }
+}
+
 /* Reduced Motion overrides */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
