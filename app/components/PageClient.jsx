@@ -18,6 +18,7 @@ import Accordions from './Accordions';
 import Contact from './Contact';
 import Footer from './Footer';
 import CommandPalette from './CommandPalette';
+import TabAnimator from './TabAnimator';
 
 // Register GSAP ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -176,6 +177,9 @@ const PageClient = React.memo(function PageClient() {
         isOpen={paletteOpen} 
         onClose={() => setPaletteOpen(false)} 
       />
+
+      {/* Dynamic Browser Tab & Favicon Animator */}
+      <TabAnimator />
     </>
   );
 });
