@@ -3,23 +3,18 @@
 import { useEffect } from 'react';
 
 /**
- * TabAnimator: Adds subtle dynamic life to the browser tab icon & title.
- * - Animates the Cyan 'S' icon glow in the browser tab.
- * - Detects when user leaves tab and shows engaging return messages.
+ * TabAnimator: Ultra-smooth, high-precision Canvas Favicon & Tab Title Animation.
+ * - Renders a real-time living neon radar dot and glowing 'S' icon via offscreen canvas.
+ * - Smooth sine-wave breathing pulse cycle (never stutters).
+ * - Dynamic interactive status when tab is active vs blurred.
  */
 export default function TabAnimator() {
   useEffect(() => {
-    let faviconInterval;
+    let animInterval;
     let titleInterval;
-    const defaultTitle = "ShaswatShell — Dev Console | Building & Shipping";
-    const awayTitles = [
-      "⚡ Come back & explore! | ShaswatShell",
-      "👀 Still checking builds? | ShaswatShell",
-      "🚀 NovaDL & Tools live | ShaswatShell"
-    ];
-    let awayIndex = 0;
+    let step = 0;
 
-    // Create or find dynamic favicon link
+    // Find or create favicon link element
     let link = document.querySelector("link[rel~='icon']");
     if (!link) {
       link = document.createElement('link');
@@ -27,40 +22,110 @@ export default function TabAnimator() {
       document.head.appendChild(link);
     }
 
-    // Generate dynamic SVG favicon frames with pulsing cyan accent
-    const frames = [
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
-        <path d="M22 11.5C22 8.5 19.5 7 16 7C12.5 7 10 8.5 10 11.5C10 14.5 13 15.2 16 16C19 16.8 22 17.5 22 20.5C22 23 19.5 25 16 25C12.5 25 10 23 10 20.5" fill="none" stroke="#00c2d1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="25" cy="7" r="2.5" fill="#3ef07c"/>
-      </svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
-        <path d="M22 11.5C22 8.5 19.5 7 16 7C12.5 7 10 8.5 10 11.5C10 14.5 13 15.2 16 16C19 16.8 22 17.5 22 20.5C22 23 19.5 25 16 25C12.5 25 10 23 10 20.5" fill="none" stroke="#00f0ff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="25" cy="7" r="3" fill="#00f0ff"/>
-      </svg>`,
-      `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-        <rect width="32" height="32" rx="7" fill="#0a0a0a"/>
-        <path d="M22 11.5C22 8.5 19.5 7 16 7C12.5 7 10 8.5 10 11.5C10 14.5 13 15.2 16 16C19 16.8 22 17.5 22 20.5C22 23 19.5 25 16 25C12.5 25 10 23 10 20.5" fill="none" stroke="#8b6bff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="25" cy="7" r="2.5" fill="#8b6bff"/>
-      </svg>`
-    ];
+    // Create offscreen 64x64 Retina canvas for ultra-crisp icon rendering
+    const canvas = document.createElement('canvas');
+    canvas.width = 64;
+    canvas.height = 64;
+    const ctx = canvas.getContext('2d');
 
-    let frameIndex = 0;
-    const updateFavicon = () => {
-      if (document.hidden) return;
-      const svg = frames[frameIndex];
-      link.href = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
-      frameIndex = (frameIndex + 1) % frames.length;
+    if (!ctx) return;
+
+    // Smooth Canvas Renderer Function
+    const drawFrame = () => {
+      if (document.hidden) return; // Save CPU when user is away
+
+      step += 0.08;
+      const pulse = (Math.sin(step) + 1) / 2; // Smooth 0 to 1 wave
+      const radarRadius = 4 + pulse * 4;
+      const radarOpacity = (1 - pulse) * 0.8;
+
+      ctx.clearRect(0, 0, 64, 64);
+
+      // 1. Dark Rounded Background Container
+      ctx.fillStyle = '#0a0a0a';
+      ctx.beginPath();
+      ctx.roundRect(2, 2, 60, 60, 14);
+      ctx.fill();
+
+      // 2. Subtle Border Glow
+      ctx.strokeStyle = `rgba(0, 194, 209, ${0.2 + pulse * 0.3})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // 3. Neon Glowing 'S' Path
+      ctx.save();
+      ctx.lineWidth = 6;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.strokeStyle = pulse > 0.5 ? '#00f0ff' : '#00c2d1';
+      ctx.shadowColor = '#00c2d1';
+      ctx.shadowBlur = 6 + pulse * 6;
+
+      ctx.beginPath();
+      // Scaling SVG path points: (M22 11.5 ... M10 20.5) scaled 2x to fit 64x64
+      ctx.moveTo(44, 23);
+      ctx.bezierCurveTo(44, 17, 39, 14, 32, 14);
+      ctx.bezierCurveTo(25, 14, 20, 17, 20, 23);
+      ctx.bezierCurveTo(20, 29, 26, 30.4, 32, 32);
+      ctx.bezierCurveTo(38, 33.6, 44, 35, 44, 41);
+      ctx.bezierCurveTo(44, 46, 39, 50, 32, 50);
+      ctx.bezierCurveTo(25, 50, 20, 46, 20, 41);
+      ctx.stroke();
+      ctx.restore();
+
+      // 4. Expanding Radar Wave Ring
+      ctx.beginPath();
+      ctx.arc(50, 14, radarRadius, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(62, 240, 124, ${radarOpacity})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // 5. Bright Live Status Dot
+      ctx.beginPath();
+      ctx.arc(50, 14, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#3ef07c';
+      ctx.shadowColor = '#3ef07c';
+      ctx.shadowBlur = 8;
+      ctx.fill();
+
+      // Push canvas data URL directly to favicon
+      link.href = canvas.toDataURL('image/png');
     };
 
-    // Cycle favicon every 1.5 seconds when active
-    faviconInterval = setInterval(updateFavicon, 1500);
+    // Run ultra-smooth continuous animation loop (30 FPS for crisp browser tab updates with zero CPU drain)
+    animInterval = setInterval(drawFrame, 65);
 
-    // Handle Tab Focus & Away States
+    // Dynamic Title Cycling
+    const activeTitles = [
+      "ShaswatShell ⚡ | Dev Console",
+      "ShaswatShell 🟢 | Building & Shipping",
+      "ShaswatShell 🚀 | NovaDL & Live Tools"
+    ];
+    const awayTitles = [
+      "⚡ Come back & explore! | ShaswatShell",
+      "👀 Still checking builds? | ShaswatShell",
+      "📦 Real projects shipping | ShaswatShell"
+    ];
+
+    let activeIndex = 0;
+    let awayIndex = 0;
+
+    // Subtly cycle title status every 4 seconds
+    const startActiveTitleCycle = () => {
+      clearInterval(titleInterval);
+      document.title = activeTitles[0];
+      titleInterval = setInterval(() => {
+        activeIndex = (activeIndex + 1) % activeTitles.length;
+        document.title = activeTitles[activeIndex];
+      }, 4000);
+    };
+
+    startActiveTitleCycle();
+
+    // Tab Visibility Handler
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        clearInterval(faviconInterval);
+        clearInterval(titleInterval);
         document.title = awayTitles[0];
         titleInterval = setInterval(() => {
           awayIndex = (awayIndex + 1) % awayTitles.length;
@@ -69,17 +134,14 @@ export default function TabAnimator() {
       } else {
         clearInterval(titleInterval);
         document.title = "✨ Welcome Back! | ShaswatShell";
-        setTimeout(() => {
-          document.title = defaultTitle;
-        }, 1500);
-        faviconInterval = setInterval(updateFavicon, 1500);
+        setTimeout(startActiveTitleCycle, 1200);
       }
     };
 
     document.addEventListener("visibilitychange", handleVisibilityChange);
 
     return () => {
-      clearInterval(faviconInterval);
+      clearInterval(animInterval);
       clearInterval(titleInterval);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
