@@ -230,19 +230,15 @@
 
 
 
-/* Glassmorphism Panel Utilities */
+/* High-Performance Panel Utilities (Zero GPU Blur Thrashing) */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .dark .glass-panel {
-  background: rgba(10, 10, 10, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(17, 17, 19, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Gradient Text Highlight */
@@ -257,28 +253,22 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Bordered glass card — translucent surface letting 3D backdrop shine through */
+/* Bordered card — crisp surface with zero scroll-lag */
 .card {
   border: 1px solid rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+  background: #ffffff;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 .card:hover {
   border-color: #00c2d1;
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.82);
 }
 .dark .card {
-  border-color: rgba(255, 255, 255, 0.12);
-  background: rgba(10, 10, 10, 0.62);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  border-color: rgba(255, 255, 255, 0.1);
+  background: #111113;
 }
 .dark .card:hover {
   border-color: #00c2d1;
-  background: rgba(10, 10, 10, 0.75);
 }
 
 .btn-primary {
@@ -516,126 +506,22 @@
 }
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   Dynamic Moving Cyber Background Animations (.aurora-orb & .cyber-scanline)
+   Lightweight Ambient Gradients
 ───────────────────────────────────────────────────────────────────────────── */
 
-.aurora-orb {
-  will-change: transform;
-  pointer-events: none;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  contain: paint;
-}
-
-.aurora-cyan {
-  animation: float-aurora-1 18s ease-in-out infinite alternate;
-}
-
-.aurora-violet {
-  animation: float-aurora-2 22s ease-in-out infinite alternate;
-}
-
-.aurora-emerald {
-  animation: float-aurora-3 26s ease-in-out infinite alternate;
-}
-
-.aurora-blue {
-  animation: float-aurora-4 20s ease-in-out infinite alternate;
-}
-
-@keyframes float-aurora-1 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    opacity: 0.8;
-  }
-  50% {
-    transform: translate3d(80px, 60px, 0) scale(1.15) rotate(15deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(-50px, 120px, 0) scale(0.92) rotate(-10deg);
-    opacity: 0.75;
-  }
-}
-
-@keyframes float-aurora-2 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    opacity: 0.75;
-  }
-  50% {
-    transform: translate3d(-90px, 90px, 0) scale(1.2) rotate(-20deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(60px, 40px, 0) scale(0.95) rotate(15deg);
-    opacity: 0.8;
-  }
-}
-
-@keyframes float-aurora-3 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.6;
-  }
-  50% {
-    transform: translate3d(100px, -70px, 0) scale(1.25);
-    opacity: 0.95;
-  }
-  100% {
-    transform: translate3d(-80px, 50px, 0) scale(0.9);
-    opacity: 0.7;
-  }
-}
-
-@keyframes float-aurora-4 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.7;
-  }
-  50% {
-    transform: translate3d(-70px, -80px, 0) scale(1.18);
-    opacity: 1;
-  }
-  100% {
-    transform: translate3d(50px, -40px, 0) scale(0.95);
-    opacity: 0.65;
-  }
-}
-
-/* Cyber Scanning Line Beam */
-.cyber-scanline {
+.aurora-glow-top {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(0, 194, 209, 0.4) 30%, rgba(139, 107, 255, 0.7) 50%, rgba(0, 194, 209, 0.4) 70%, transparent 100%);
-  box-shadow: 0 0 15px rgba(0, 194, 209, 0.5), 0 0 30px rgba(139, 107, 255, 0.3);
-  animation: cyber-scan 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  opacity: 0.5;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  max-width: 100vw;
+  height: 400px;
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 194, 209, 0.12), rgba(139, 107, 255, 0.05) 50%, transparent 80%);
   pointer-events: none;
 }
-
-.dark .cyber-scanline {
-  opacity: 0.75;
-}
-
-@keyframes cyber-scan {
-  0% {
-    top: -5%;
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.7;
-  }
-  85% {
-    opacity: 0.7;
-  }
-  100% {
-    top: 105%;
-    opacity: 0;
-  }
+.dark .aurora-glow-top {
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(0, 194, 209, 0.18), rgba(139, 107, 255, 0.08) 50%, transparent 80%);
 }
 
 /* Reduced Motion overrides */

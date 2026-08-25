@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect, memo } from 'react';
 import { motion } from 'framer-motion';
+import { soundManager } from '../utils/SoundManager';
 
 const COMMANDS = {
   help: `Available commands:

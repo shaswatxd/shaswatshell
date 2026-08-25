@@ -261,16 +261,16 @@ export default memo(function Projects() {
   const [searchQuery, setSearchQuery] = useState("");
 
   const filters = [
-    { id: "ALL", label: "All Projects" },
-    { id: "APP", label: "Desktop Apps" },
-    { id: "WEB", label: "Web Apps & Tools" },
+    { id: "ALL", label: "All Works" },
+    { id: "APP", label: "Desktop & Mobile" },
+    { id: "WEB", label: "Web Tools & Utilities" },
   ];
 
   const filteredProjects = PROJECTS.filter((proj) => {
     const matchesCategory =
       activeFilter === "ALL" ||
-      (activeFilter === "APP" && proj.badge === "APP") ||
-      (activeFilter === "WEB" && (proj.badge === "SITE" || proj.badge === "WEB/APP"));
+      (activeFilter === "APP" && (proj.badge === "APP" || proj.type === "DESKTOP")) ||
+      (activeFilter === "WEB" && (proj.badge === "SITE" || proj.badge === "WEB/APP" || proj.type === "WEB APP" || proj.type === "WEB TOOL"));
 
     const matchesSearch =
       !searchQuery.trim() ||
@@ -280,16 +280,19 @@ export default memo(function Projects() {
     return matchesCategory && matchesSearch;
   });
 
+  const novaDL = PROJECTS.find((p) => p.name === "NovaDL");
+  const otherProjects = filteredProjects.filter((p) => p.name !== "NovaDL" || activeFilter !== "ALL" || searchQuery);
+
   return (
     <>
       <div id="projects" className="max-w-[1440px] mx-auto px-6 lg:px-16 pt-20 pb-8 animate-section flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan mb-3 inline-block">Selected Work</span>
-          <h2 className="font-semibold text-4xl lg:text-5xl tracking-tight text-[#0a0a0a] dark:text-[#f2f2f2]">Live Project Index</h2>
+          <span className="font-mono text-[10px] tracking-[0.25em] uppercase text-cyan mb-3 inline-block">Crafted Index</span>
+          <h2 className="font-semibold text-4xl lg:text-5xl tracking-tight text-[#0a0a0a] dark:text-[#f2f2f2]">Featured Work &amp; Tools</h2>
         </div>
 
         <div className="font-mono text-xs text-[#888] tracking-widest">
-          SHOWING [{filteredProjects.length}/{PROJECTS.length}] BUILDS
+          [{filteredProjects.length} SHIPPED BUILDS]
         </div>
       </div>
 
@@ -301,11 +304,12 @@ export default memo(function Projects() {
             <button
               key={tab.id}
               onClick={() => {
+                soundManager?.playClick?.();
                 setActiveFilter(tab.id);
               }}
-              className={`px-4 py-2 text-xs font-mono tracking-wider uppercase border transition-all duration-200 whitespace-nowrap ${
+              className={`px-4 py-2 text-xs font-mono tracking-wider uppercase border rounded-md transition-all duration-200 whitespace-nowrap ${
                 activeFilter === tab.id
-                  ? 'border-cyan bg-cyan/10 text-cyan font-bold shadow-[0_0_12px_rgba(0,194,209,0.2)]'
+                  ? 'border-cyan bg-cyan/10 text-cyan font-bold shadow-[0_0_12px_rgba(0,194,209,0.15)]'
                   : 'border-[#e8e8e8] dark:border-white/15 text-[#666] dark:text-[#999] hover:border-[#0a0a0a] dark:hover:border-white/40 hover:text-[#0a0a0a] dark:hover:text-[#f2f2f2]'
               }`}
             >
@@ -315,13 +319,13 @@ export default memo(function Projects() {
         </div>
 
         {/* Live Search Input */}
-        <div className="relative w-full sm:w-64">
+        <div className="relative w-full sm:w-72">
           <input
             type="text"
-            placeholder="Search projects..."
+            placeholder="Filter by name, tech, or feature..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full px-4 py-2 pl-9 font-mono text-xs border border-[#e8e8e8] dark:border-white/15 bg-white dark:bg-[#0a0a0a] text-[#0a0a0a] dark:text-white rounded-md focus:border-cyan focus:outline-none transition-colors"
+            className="w-full px-4 py-2 pl-9 font-mono text-xs border border-[#e8e8e8] dark:border-white/15 bg-white dark:bg-[#111114] text-[#0a0a0a] dark:text-white rounded-md focus:border-cyan focus:outline-none transition-colors"
           />
           <svg
             className="absolute left-3 top-2.5 w-3.5 h-3.5 text-[#888]"
@@ -334,32 +338,121 @@ export default memo(function Projects() {
         </div>
       </div>
 
-      {/* ── Project Grid ── */}
-      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 grid grid-cols-1 md:grid-cols-3 border-t border-l border-[#e8e8e8] dark:border-white/15 mb-4">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project, idx) => (
-            <Card
-              key={project.name}
-              project={project}
-              idx={idx}
-              onOpenDetails={setActiveProject}
-              borderClasses={`border-r border-b border-[#e8e8e8] dark:border-white/15`}
-            />
-          ))}
-        </AnimatePresence>
+      {/* ── Asymmetric Bento Grid Showcase ── */}
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-16 mb-12">
+        {/* NovaDL Flagship Bento Hero (Shown on All Works when not actively searching) */}
+        {activeFilter === "ALL" && !searchQuery && novaDL && (
+          <div className="mb-6 p-6 sm:p-8 rounded-2xl border border-violet/30 dark:border-violet/20 bg-gradient-to-br from-white via-white to-violet/[0.04] dark:from-[#111114] dark:via-[#111114] dark:to-violet/[0.06] shadow-sm relative overflow-hidden group">
+            {/* Top accent glow line */}
+            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-violet to-transparent opacity-80" />
 
-        {/* Placeholder Coming Soon Box */}
-        {filteredProjects.length > 0 && (
-          <div className="card flex flex-col items-center justify-center border-r border-b border-[#e8e8e8] dark:border-white/15 text-[#666] dark:text-[#999] hover:text-cyan min-h-[300px] text-center gap-4 select-none group">
-            <div className="w-12 h-12 border border-dashed border-[#999] dark:border-white/30 flex items-center justify-center text-lg transition-transform duration-500 group-hover:rotate-90">
-              <span>⚡</span>
-            </div>
-            <div className="text-xs font-medium">
-              In Development<br />
-              <span className="font-mono text-[9px] text-[#999] dark:text-[#777]">NEXT_BUILD_QUEUED</span>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Details */}
+              <div className="lg:col-span-7">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="text-3xl">{novaDL.icon}</span>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h3 className="font-semibold text-2xl text-[#0a0a0a] dark:text-[#f2f2f2]">{novaDL.name}</h3>
+                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet/15 text-violet border border-violet/30">
+                        FLAGSHIP APP
+                      </span>
+                    </div>
+                    <span className="font-mono text-[11px] text-[#777]">Windows Desktop &amp; Android APK</span>
+                  </div>
+                </div>
+
+                <p className="text-sm text-[#555] dark:text-[#aaa] leading-relaxed mb-6">
+                  {novaDL.desc}
+                </p>
+
+                {/* Feature Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {novaDL.features.slice(0, 4).map((f, i) => (
+                    <span key={i} className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-black/[0.04] dark:bg-white/[0.05] border border-black/5 dark:border-white/10 text-[#444] dark:text-[#ccc]">
+                      {f}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Direct Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href={novaDL.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-5 py-2.5 rounded-lg bg-violet hover:bg-violet/90 text-white font-semibold text-xs uppercase tracking-wider transition-all shadow-md shadow-violet/20 flex items-center gap-2"
+                  >
+                    <span>Launch NovaDL</span>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
+                    </svg>
+                  </a>
+
+                  <button
+                    onClick={() => setActiveProject(novaDL)}
+                    className="px-4 py-2.5 rounded-lg border border-[#0a0a0a]/15 dark:border-white/15 hover:border-violet text-xs font-mono text-[#666] dark:text-[#aaa] hover:text-[#0a0a0a] dark:hover:text-white transition-colors cursor-pointer"
+                  >
+                    View System Specs →
+                  </button>
+                </div>
+              </div>
+
+              {/* Right Interactive Mock Engine Visualizer */}
+              <div className="lg:col-span-5 p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-black/40 font-mono text-xs">
+                <div className="flex items-center justify-between pb-3 mb-3 border-b border-black/10 dark:border-white/10 text-[11px] text-[#777]">
+                  <span className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span>WASM_WORKER_ENGINE</span>
+                  </span>
+                  <span>16 THREADS ACTIVE</span>
+                </div>
+
+                <div className="space-y-3 text-[11px]">
+                  <div>
+                    <div className="flex justify-between text-[#666] dark:text-[#aaa] mb-1">
+                      <span>Chunk Splitting (64MB blocks)</span>
+                      <span className="text-violet font-semibold">100%</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+                      <div className="w-full h-full bg-violet rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between text-[#666] dark:text-[#aaa] mb-1">
+                      <span>HLS Stream Demux &amp; Assembler</span>
+                      <span className="text-cyan font-semibold">Ready</span>
+                    </div>
+                    <div className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+                      <div className="w-[85%] h-full bg-cyan rounded-full"></div>
+                    </div>
+                  </div>
+
+                  <div className="pt-2 text-[10px] text-[#777] dark:text-[#888] flex items-center justify-between">
+                    <span>SQLite WASM Persistence</span>
+                    <span className="text-emerald-500 font-bold">SYNCHRONIZED</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         )}
+
+        {/* Regular Grid Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <AnimatePresence mode="popLayout">
+            {(activeFilter === "ALL" && !searchQuery ? otherProjects : filteredProjects).map((project, idx) => (
+              <Card
+                key={project.name}
+                project={project}
+                idx={idx}
+                onOpenDetails={setActiveProject}
+                borderClasses="rounded-xl border border-[#e8e8e8] dark:border-white/10 shadow-sm"
+              />
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
 
       {/* Details Modal overlay */}

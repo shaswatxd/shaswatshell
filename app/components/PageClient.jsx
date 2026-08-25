@@ -18,6 +18,7 @@ import Terminal from './Terminal';
 import Accordions from './Accordions';
 import Contact from './Contact';
 import Footer from './Footer';
+import CommandPalette from './CommandPalette';
 
 // Register GSAP ScrollTrigger plugin
 if (typeof window !== "undefined") {
@@ -159,12 +160,36 @@ function Preloader({ onComplete }) {
 
 const PageClient = React.memo(function PageClient() {
   const [loading, setLoading] = useState(true);
+  const [paletteOpen, setPaletteOpen] = useState(false);
 
   const finishBoot = React.useCallback(() => {
     setLoading(false);
     if (typeof window !== "undefined") {
       window.scrollTo(0, 0);
     }
+  }, []);
+
+  // Global Keyboard shortcut listener (Cmd+K / Ctrl+K / slash)
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setPaletteOpen((prev) => !prev);
+      } else if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement?.tagName)) {
+        e.preventDefault();
+        setPaletteOpen(true);
+      }
+    };
+
+    const handleCustomOpen = () => setPaletteOpen(true);
+
+    window.addEventListener('keydown', handleKeyDown);
+    window.addEventListener('open-command-palette', handleCustomOpen);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('open-command-palette', handleCustomOpen);
+    };
   }, []);
 
   useEffect(() => {
@@ -266,7 +291,7 @@ const PageClient = React.memo(function PageClient() {
       {/* Content wrapper */}
       <div id="main-content" className="relative w-full max-w-[100vw] overflow-x-clip bg-white dark:bg-[#0a0a0a] transition-colors duration-300">
         <BackgroundGrid />
-        <Navigation />
+        <Navigation onOpenSearch={() => setPaletteOpen(true)} />
         <Hero />
         <StatsStrip />
         <SectionDivider />
@@ -282,6 +307,8 @@ const PageClient = React.memo(function PageClient() {
         <Contact />
         <Footer />
       </div>
+
+      <CommandPalette isOpen={paletteOpen} onClose={() => setPaletteOpen(false)} />
     </>
   );
 });

@@ -47,7 +47,7 @@ const BackgroundGrid = memo(function BackgroundGrid() {
     const particles = [];
     const getParticleCount = (w) => {
       isMobile = w < 768;
-      return isMobile ? 24 : 48; // Lean count for maximum 120Hz smoothness
+      return isMobile ? 12 : 24; // Lean count for maximum 120Hz silky smoothness
     };
 
     class Particle {
@@ -62,9 +62,9 @@ const BackgroundGrid = memo(function BackgroundGrid() {
         this.size = this.baseSize;
         
         // Gentle drifting velocity
-        const speed = (Math.random() * 0.35 + 0.12) * (Math.random() < 0.5 ? 1 : -1);
+        const speed = (Math.random() * 0.3 + 0.1) * (Math.random() < 0.5 ? 1 : -1);
         this.vx = speed;
-        this.vy = (Math.random() * 0.4 + 0.15) * (Math.random() < 0.5 ? 1 : -1);
+        this.vy = (Math.random() * 0.35 + 0.12) * (Math.random() < 0.5 ? 1 : -1);
         
         // Color Type: 0 = Cyan, 1 = Violet, 2 = Emerald
         const roll = Math.random();
@@ -163,7 +163,7 @@ const BackgroundGrid = memo(function BackgroundGrid() {
     document.addEventListener('visibilitychange', handleVisibilityChange);
 
     // Max distance squared for lines (avoids Math.sqrt in loop)
-    const maxDist = 115;
+    const maxDist = 95;
     const maxDistSq = maxDist * maxDist;
 
     // Batched Render Loop
@@ -183,7 +183,7 @@ const BackgroundGrid = memo(function BackgroundGrid() {
 
       // 1. Draw Mouse Ambient Aura (Single Gradient)
       if (mouse.isActive && mouse.x > 0 && mouse.y > 0) {
-        const spotRadius = isMobile ? 120 : 180;
+        const spotRadius = isMobile ? 100 : 160;
         const grad = ctx.createRadialGradient(
           mouse.x, mouse.y, 0,
           mouse.x, mouse.y, spotRadius
@@ -215,14 +215,14 @@ const BackgroundGrid = memo(function BackgroundGrid() {
           }
         }
       }
-      ctx.lineWidth = 0.65;
-      ctx.strokeStyle = dark ? 'rgba(0, 194, 209, 0.14)' : 'rgba(0, 160, 180, 0.09)';
+      ctx.lineWidth = 0.6;
+      ctx.strokeStyle = dark ? 'rgba(0, 194, 209, 0.12)' : 'rgba(0, 160, 180, 0.08)';
       ctx.stroke();
 
       // 3. Connect Lines to Active Pointer/Touch (Single Batched Stroke)
       if (mouse.isActive && mouse.x > 0 && mouse.y > 0) {
         ctx.beginPath();
-        const mDistSq = 100 * 100;
+        const mDistSq = 90 * 90;
         for (let i = 0; i < pLen; i++) {
           const p = particles[i];
           const dx = p.x - mouse.x;
@@ -232,7 +232,7 @@ const BackgroundGrid = memo(function BackgroundGrid() {
             ctx.lineTo(mouse.x, mouse.y);
           }
         }
-        ctx.strokeStyle = dark ? 'rgba(139, 107, 255, 0.25)' : 'rgba(139, 107, 255, 0.15)';
+        ctx.strokeStyle = dark ? 'rgba(139, 107, 255, 0.22)' : 'rgba(139, 107, 255, 0.14)';
         ctx.stroke();
       }
 
@@ -282,22 +282,8 @@ const BackgroundGrid = memo(function BackgroundGrid() {
       style={{ contain: 'strict' }}
       aria-hidden="true"
     >
-      {/* ─── GPU-Accelerated Fluid Aurora Glow Orbs ─── */}
-      
-      {/* Top Cyan Aurora */}
-      <div 
-        className="aurora-orb aurora-cyan absolute -top-[10%] left-[5%] w-[450px] h-[450px] sm:w-[600px] sm:h-[600px] rounded-full bg-gradient-to-br from-cyan/16 via-cyan/6 to-transparent blur-[60px] sm:blur-[80px] dark:from-cyan/18 dark:via-cyan/5"
-      />
-
-      {/* Top-Right Violet Aurora */}
-      <div 
-        className="aurora-orb aurora-violet absolute -top-[5%] -right-[10%] w-[400px] h-[400px] sm:w-[550px] sm:h-[550px] rounded-full bg-gradient-to-bl from-violet/14 via-violet/5 to-transparent blur-[65px] sm:blur-[85px] dark:from-violet/20 dark:via-violet/6"
-      />
-
-      {/* Mid Emerald Plasma (Desktop only for max mobile performance) */}
-      <div 
-        className="aurora-orb aurora-emerald hidden md:block absolute top-[40%] left-[25%] w-[400px] h-[400px] lg:w-[500px] lg:h-[500px] rounded-full bg-gradient-to-tr from-emerald-500/8 via-cyan/4 to-transparent blur-[70px] dark:from-emerald-500/10 dark:via-cyan/5"
-      />
+      {/* ─── Lightweight Top Ambient Gradient Glow (Zero GPU Overhead) ─── */}
+      <div className="aurora-glow-top" />
 
       {/* ─── 60-120 FPS Batched Cyber Canvas ─── */}
       <canvas
@@ -307,18 +293,12 @@ const BackgroundGrid = memo(function BackgroundGrid() {
 
       {/* ─── Cyber Blueprint Grid Pattern with Vignette Mask ─── */}
       <div 
-        className="absolute inset-0 bg-cyber-grid opacity-[0.45] dark:opacity-[0.35]"
+        className="absolute inset-0 bg-cyber-grid opacity-[0.35] dark:opacity-[0.25]"
         style={{
           maskImage: 'radial-gradient(ellipse 95% 75% at 50% 30%, black 30%, transparent 90%)',
           WebkitMaskImage: 'radial-gradient(ellipse 95% 75% at 50% 30%, black 30%, transparent 90%)'
         }}
       />
-
-      {/* ─── Vertical Scanning Cyber Light Beam (Laser Scanline) ─── */}
-      <div className="cyber-scanline" />
-
-      {/* ─── Ambient Digital Matrix Dot Pattern ─── */}
-      <div className="absolute inset-0 bg-[radial-gradient(#000000_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:32px_32px] opacity-[0.025] dark:opacity-[0.035]" />
     </div>
   );
 });
