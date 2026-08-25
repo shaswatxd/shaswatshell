@@ -34,10 +34,8 @@ export default function TabAnimator() {
     const drawFrame = () => {
       if (document.hidden) return; // Save CPU when user is away
 
-      step += 0.08;
-      const pulse = (Math.sin(step) + 1) / 2; // Smooth 0 to 1 wave
-      const radarRadius = 4 + pulse * 4;
-      const radarOpacity = (1 - pulse) * 0.8;
+      step += 0.12;
+      const pulse = (Math.sin(step * 0.7) + 1) / 2; // Smooth breathing pulse
 
       ctx.clearRect(0, 0, 64, 64);
 
@@ -48,41 +46,62 @@ export default function TabAnimator() {
       ctx.fill();
 
       // 2. Subtle Border Glow
-      ctx.strokeStyle = `rgba(0, 194, 209, ${0.2 + pulse * 0.3})`;
+      ctx.strokeStyle = `rgba(0, 194, 209, ${0.15 + pulse * 0.25})`;
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // 3. Neon Glowing 'S' Path
+      // Define standard S-Curve Path
+      const buildSPath = () => {
+        ctx.beginPath();
+        ctx.moveTo(44, 23);
+        ctx.bezierCurveTo(44, 16.5, 38.5, 14, 32, 14);
+        ctx.bezierCurveTo(24.5, 14, 19.5, 17.5, 19.5, 23);
+        ctx.bezierCurveTo(19.5, 29.5, 26, 30.5, 32, 32);
+        ctx.bezierCurveTo(38.5, 33.5, 44.5, 35, 44.5, 41);
+        ctx.bezierCurveTo(44.5, 46.5, 39, 50, 32, 50);
+        ctx.bezierCurveTo(24.5, 50, 19.5, 45.5, 19.5, 40);
+      };
+
+      // 3. Layer A: Dim Base 'S' Track
       ctx.save();
       ctx.lineWidth = 6;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = pulse > 0.5 ? '#00f0ff' : '#00c2d1';
-      ctx.shadowColor = '#00c2d1';
-      ctx.shadowBlur = 6 + pulse * 6;
-
-      ctx.beginPath();
-      // Scaling SVG path points: (M22 11.5 ... M10 20.5) scaled 2x to fit 64x64
-      ctx.moveTo(44, 23);
-      ctx.bezierCurveTo(44, 17, 39, 14, 32, 14);
-      ctx.bezierCurveTo(25, 14, 20, 17, 20, 23);
-      ctx.bezierCurveTo(20, 29, 26, 30.4, 32, 32);
-      ctx.bezierCurveTo(38, 33.6, 44, 35, 44, 41);
-      ctx.bezierCurveTo(44, 46, 39, 50, 32, 50);
-      ctx.bezierCurveTo(25, 50, 20, 46, 20, 41);
+      ctx.strokeStyle = 'rgba(0, 194, 209, 0.25)';
+      buildSPath();
       ctx.stroke();
       ctx.restore();
 
-      // 4. Expanding Radar Wave Ring
+      // 4. Layer B: Moving Glowing Laser Energy Beam traveling through the 'S'
+      ctx.save();
+      ctx.lineWidth = 6.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.setLineDash([32, 48]);
+      ctx.lineDashOffset = -step * 18; // Smooth continuous motion along curve
+      
+      // Dynamic electric cyan/lime color shift
+      const hue = 175 + Math.sin(step * 0.5) * 25; // Shifts between cyan & emerald
+      ctx.strokeStyle = `hsl(${hue}, 100%, 65%)`;
+      ctx.shadowColor = `hsl(${hue}, 100%, 55%)`;
+      ctx.shadowBlur = 9;
+
+      buildSPath();
+      ctx.stroke();
+      ctx.restore();
+
+      // 5. Expanding Radar Wave Ring & Status Dot
+      const radarRadius = 3.5 + pulse * 4.5;
+      const radarOpacity = (1 - pulse) * 0.85;
+
       ctx.beginPath();
-      ctx.arc(50, 14, radarRadius, 0, Math.PI * 2);
+      ctx.arc(50, 13, radarRadius, 0, Math.PI * 2);
       ctx.strokeStyle = `rgba(62, 240, 124, ${radarOpacity})`;
-      ctx.lineWidth = 2;
+      ctx.lineWidth = 1.8;
       ctx.stroke();
 
-      // 5. Bright Live Status Dot
       ctx.beginPath();
-      ctx.arc(50, 14, 4, 0, Math.PI * 2);
+      ctx.arc(50, 13, 3.8, 0, Math.PI * 2);
       ctx.fillStyle = '#3ef07c';
       ctx.shadowColor = '#3ef07c';
       ctx.shadowBlur = 8;
