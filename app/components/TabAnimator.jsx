@@ -50,47 +50,27 @@ export default function TabAnimator() {
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Define standard S-Curve Path
-      const buildSPath = () => {
-        ctx.beginPath();
-        ctx.moveTo(44, 23);
-        ctx.bezierCurveTo(44, 16.5, 38.5, 14, 32, 14);
-        ctx.bezierCurveTo(24.5, 14, 19.5, 17.5, 19.5, 23);
-        ctx.bezierCurveTo(19.5, 29.5, 26, 30.5, 32, 32);
-        ctx.bezierCurveTo(38.5, 33.5, 44.5, 35, 44.5, 41);
-        ctx.bezierCurveTo(44.5, 46.5, 39, 50, 32, 50);
-        ctx.bezierCurveTo(24.5, 50, 19.5, 45.5, 19.5, 40);
-      };
-
-      // 3. Layer A: Dim Base 'S' Track
+      // 3. Clean Solid Glowing 'S' Path
       ctx.save();
       ctx.lineWidth = 6;
       ctx.lineCap = 'round';
       ctx.lineJoin = 'round';
-      ctx.strokeStyle = 'rgba(0, 194, 209, 0.25)';
-      buildSPath();
+      ctx.strokeStyle = '#00c2d1';
+      ctx.shadowColor = '#00c2d1';
+      ctx.shadowBlur = 6 + pulse * 6;
+
+      ctx.beginPath();
+      ctx.moveTo(44, 23);
+      ctx.bezierCurveTo(44, 16.5, 38.5, 14, 32, 14);
+      ctx.bezierCurveTo(24.5, 14, 19.5, 17.5, 19.5, 23);
+      ctx.bezierCurveTo(19.5, 29.5, 26, 30.5, 32, 32);
+      ctx.bezierCurveTo(38.5, 33.5, 44.5, 35, 44.5, 41);
+      ctx.bezierCurveTo(44.5, 46.5, 39, 50, 32, 50);
+      ctx.bezierCurveTo(24.5, 50, 19.5, 45.5, 19.5, 40);
       ctx.stroke();
       ctx.restore();
 
-      // 4. Layer B: Moving Glowing Laser Energy Beam traveling through the 'S'
-      ctx.save();
-      ctx.lineWidth = 6.5;
-      ctx.lineCap = 'round';
-      ctx.lineJoin = 'round';
-      ctx.setLineDash([32, 48]);
-      ctx.lineDashOffset = -step * 18; // Smooth continuous motion along curve
-      
-      // Dynamic electric cyan/lime color shift
-      const hue = 175 + Math.sin(step * 0.5) * 25; // Shifts between cyan & emerald
-      ctx.strokeStyle = `hsl(${hue}, 100%, 65%)`;
-      ctx.shadowColor = `hsl(${hue}, 100%, 55%)`;
-      ctx.shadowBlur = 9;
-
-      buildSPath();
-      ctx.stroke();
-      ctx.restore();
-
-      // 5. Expanding Radar Wave Ring & Status Dot
+      // 4. Expanding Radar Wave Ring & Status Dot
       const radarRadius = 3.5 + pulse * 4.5;
       const radarOpacity = (1 - pulse) * 0.85;
 
