@@ -170,8 +170,8 @@ export const PROJECTS = [
   },
 
   {
-    name: "ResumeAI",
-    desc: "AI-powered resume builder that creates professional resumes from a simple text description. Choose from 30 templates and export as PDF instantly.",
+    name: "Resume Builder",
+    desc: "Professional resume builder to craft standout resumes easily. Choose from 30 templates, customize sections, and export as PDF instantly.",
     icon: "📝",
     glow: "cyan",
     badge: "SITE",
@@ -181,14 +181,14 @@ export const PROJECTS = [
     badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
     borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
     features: [
-      "🤖 3 AI Models (Gemini, Groq, Cerebras)",
       "📄 30 Professional Templates",
+      "⚡ Real-Time Live Preview & Editor",
       "💾 Save Draft & Download PDF",
-      "🔒 100% Client-Side API Key Storage"
+      "🔒 100% Client-Side Private Storage"
     ],
     details: {
-      architecture: "Next.js app with client-side AI integration. API keys stored in localStorage, resumes generated entirely in the browser.",
-      modules: ["AI prompt engine", "Template renderer", "PDF export module", "Draft autosave system"]
+      architecture: "Next.js app with fully client-side resume builder. Resumes and drafts are created and stored entirely in the browser.",
+      modules: ["Interactive Editor", "30 Template Renderer", "PDF Export Module", "Draft Autosave System"]
     }
   }
 ];

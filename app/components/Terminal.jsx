@@ -42,7 +42,7 @@ currently : Shipping software, writing code & breaking bugs`,
   5. Bill Generator : Free bill & receipt generator with 30+ templates
   6. VoiceWave      : Peer-to-peer real-time browser voice chat app
   7. JustPDFCraft   : 100% Client-Side PDF Utilities Toolkit
-  8. ResumeAI       : AI-Powered Resume Builder with 30 Templates`,
+  8. Resume Builder : Professional Resume Builder with 30 Templates`,
 
   skills: `🛠️ CORE TECH STACK & ENGINE:
   • Languages  : JavaScript (ESNext), TypeScript, HTML5, CSS3, C++
