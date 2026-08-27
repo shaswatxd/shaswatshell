@@ -269,8 +269,8 @@ export default memo(function Projects() {
   const filteredProjects = PROJECTS.filter((proj) => {
     const matchesCategory =
       activeFilter === "ALL" ||
-      (activeFilter === "APP" && (proj.badge === "APP" || proj.type === "DESKTOP")) ||
-      (activeFilter === "WEB" && (proj.badge === "SITE" || proj.badge === "WEB/APP" || proj.type === "WEB APP" || proj.type === "WEB TOOL"));
+      (activeFilter === "APP" && (proj.badge === "APP" || proj.badge === "DESKTOP & APK" || proj.badge === "APP & WEB" || proj.type?.includes("DESKTOP") || proj.badge?.includes("APP") || proj.badge?.includes("APK"))) ||
+      (activeFilter === "WEB" && (proj.badge === "SITE" || proj.badge === "WEB/APP" || proj.badge === "APP & WEB" || proj.type?.includes("WEB") || proj.badge?.includes("SITE")));
 
     const matchesSearch =
       !searchQuery.trim() ||
