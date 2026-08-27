@@ -125,25 +125,27 @@ export const PROJECTS = [
   },
 
   {
-    name: "VoiceWave",
-    desc: "Real-time voice chat app that works directly in your browser. No account needed, no downloads — just share a room link and start talking instantly.",
-    icon: "🎙️",
+    name: "UDBRS",
+    desc: "Universal Device Backup & Recovery Suite for Windows. Ultra-low latency 60-120 FPS hardware screen mirroring, full WhatsApp Vault chat exporter with media & PDF reports, 1-click bloatware remover, 120Hz & 0.5x speed booster, and DoD 5220.22-M military trade-in data sanitizer.",
+    icon: "⚡",
     glow: "cyan",
-    badge: "WEB/APP",
-    type: "WEB APP",
-    githubUrl: "https://github.com/shaswatxd/voicewave",
-    liveUrl: "https://voicewave-7ozn.onrender.com",
+    badge: "APP",
+    type: "DESKTOP",
+    githubUrl: "https://github.com/shaswatxd/udbrsuite-releases",
+    liveUrl: "https://udbrsuite-releases.vercel.app/",
     badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
     borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
     features: [
-      "🎙️ Crystal-Clear Voice Calls",
-      "🔒 Password Protected Rooms",
-      "💬 Built-in Text Chat & Emoji",
-      "🎵 Soundboard with 10+ Sounds"
+      "🎮 60-120 FPS Direct Hardware GPU Screen Mirroring (~15ms)",
+      "💬 WhatsApp & Business Vault Exporter (HTML Reports & Media)",
+      "⚡ 120Hz Refresh Rate Lock & 0.5x System UI Speed Booster",
+      "📦 1-Click Bloatware Cleaner & Multi-Format APK Sideload",
+      "🔒 Military Trade-In Data Sanitizer (DoD 5220.22-M & NIST SP 800-88)",
+      "🛡️ 100% Offline Local Architecture with Zero Telemetry"
     ],
     details: {
-      architecture: "Runs entirely in the browser — no installs needed. Audio is transmitted in real-time between users with low latency.",
-      modules: ["PeerJS connection engine", "Web Audio API nodes", "Secure signaling sockets", "Offline cache database"]
+      architecture: "Native Windows desktop toolkit built with C#/.NET 8.0, ADB platform tools, Scrcpy hardware acceleration pipeline, and local AES-256 encryption engine with zero cloud telemetry.",
+      modules: ["60-120 FPS GPU Mirroring Engine", "WhatsApp Vault & Chat Extractor", "Display 120Hz & Speed Booster", "DoD 5220.22-M Data Sanitizer", "Bloatware & Adware Cleaner", "ADB & Fastboot USB Bridge"]
     }
   },
 
