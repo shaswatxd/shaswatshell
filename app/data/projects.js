@@ -27,31 +27,6 @@ export const PROJECTS = [
   },
 
   {
-    name: "VoiceWave",
-    desc: "Crystal-clear peer-to-peer voice chat platform & desktop client. Discord-style multi-stream screen sharing up to 1440p/60fps, rich text messaging, built-in soundboard, granular room moderation, and zero-account instant joining.",
-    icon: "🎙️",
-    glow: "cyan",
-    badge: "APP & WEB",
-    type: "DESKTOP & WEB",
-    githubUrl: "https://github.com/shaswatxd/voicewave",
-    liveUrl: "https://voicewavexd.vercel.app/",
-    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
-    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
-    features: [
-      "🎙️ WebRTC Peer-to-Peer Low-Latency Mesh Audio Engine",
-      "🖥️ Multi-Stream Screen Share (1080p/1440p 60FPS) with Audio",
-      "💬 Rich Chat with Markdown, Autocomplete Mentions & Reactions",
-      "🛡️ Room Moderation (Kick, Mute, Force Mute, Passcode & Ban)",
-      "🎵 10 Synthesized Soundboard FX & Web Audio DSP Noise Gate",
-      "⚡ Instant Zero-Account Web Access & Windows Desktop App (.exe)"
-    ],
-    details: {
-      architecture: "Peer-to-peer WebRTC mesh voice and video streaming architecture powered by Express and Socket.IO signaling, Web Audio API DSP worklet processing, and an Electron desktop shell with global shortcuts and system tray.",
-      modules: ["WebRTC P2P Voice Engine", "Electron 28 Desktop Shell", "Multi-Stream Screen Capturer", "Socket.IO Signaling Protocol", "Web Audio DSP & Soundboard", "Role & Moderation Controller"]
-    }
-  },
-
-  {
     name: "We Plays",
     desc: "Premium glassmorphic desktop music player & offline hub. Search & stream online tracks, download high-bitrate audio (MP3/FLAC up to 320kbps), build custom playlists, extract dynamic album-art themes, and sync across devices seamlessly.",
     icon: "🎵",
