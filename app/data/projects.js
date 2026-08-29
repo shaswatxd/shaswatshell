@@ -79,7 +79,7 @@ export const PROJECTS = [
 
   {
     name: "OmniDownloader",
-    desc: "High-speed multi-engine all-in-one media downloader & creator studio for TikTok, YouTube HD/MP3, Spotify, Instagram, Pinterest, and cloud drives with zero watermarks & auto-fallback extraction.",
+    desc: "High-speed multi-engine all-in-one media downloader & creator studio for Facebook, Instagram, and Twitter/X with zero watermarks & auto-fallback extraction.",
     icon: "⚡",
     glow: "cyan",
     badge: "SITE",
@@ -90,14 +90,12 @@ export const PROJECTS = [
     borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
     features: [
       "⚡ Auto-Fallback Multi-Engine Stream Extraction",
-      "🎥 No Watermark HD Downloads (TikTok, YT, IG, Pinterest)",
-      "🎵 Spotify Song Search & MP3 Audio Extractor",
-      "☁️ Cloud Drive Unlocking (Terabox, MediaFire, Drive)",
+      "🎥 No Watermark HD Downloads (Facebook, Instagram, Twitter/X)",
       "🔒 100% Free Client-Side & Server Sandbox Routing"
     ],
     details: {
-      architecture: "High-speed multi-engine extraction pipeline with dynamic failover routing, Spotify metadata resolver, YT-DLP/API worker proxies, and client-side download history.",
-      modules: ["Auto-Fallback Extraction Engine", "Spotify Metadata & Song Resolver", "Multi-Platform Media Parser", "Direct Cloud Drive Unlocker", "Client Download History Manager", "Interactive Creative Studio"]
+      architecture: "High-speed multi-engine extraction pipeline with dynamic failover routing for Facebook, Instagram, and Twitter/X, featuring zero-watermark processing and client-side download history.",
+      modules: ["Auto-Fallback Extraction Engine", "Facebook Video & Reel Parser", "Instagram Reel & Story Engine", "Twitter/X Media Extractor", "Client Download History Manager", "Interactive Creative Studio"]
     }
   },
 
