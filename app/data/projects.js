@@ -40,10 +40,9 @@ export const PROJECTS = [
     features: [
       "📥 In-App Online Music Search & Audio Downloader",
       "🎶 Custom Playlist Builder, Liked Songs & Smart Queue",
-      "💽 Lossless & High-Res Formats (MP3, FLAC, AAC, OGG up to 320kbps)",
+      "💽 Lossless & High-Res Formats (MP3, FLAC, AAC up to 320kbps)",
       "🎨 Dynamic Album Art Color-Extraction Theme Engine",
-      "☁️ Cross-Device Cloud Sync for Playlists & Favorites",
-      "🎤 Synchronized Lyrics, Insights Dashboard & ID3 Tagger"
+      "☁️ Cross-Device Cloud Sync for Playlists & Favorites"
     ],
     details: {
       architecture: "Desktop app built with Electron, React, Vite, SQLite, and Howler.js. Features high-speed audio extraction pipeline, cloud sync, and dynamic color extraction.",
@@ -52,8 +51,56 @@ export const PROJECTS = [
   },
 
   {
+    name: "UDBR Suite",
+    desc: "Universal Device Backup & Recovery Suite for Windows. Ultra-low latency 60-120 FPS hardware screen mirroring, full WhatsApp Vault chat exporter with media & PDF reports, 1-click bloatware remover, and military trade-in data sanitizer.",
+    icon: "⚡",
+    glow: "cyan",
+    badge: "APP",
+    type: "DESKTOP",
+    githubUrl: "https://github.com/shaswatxd/udbrsuite-releases",
+    liveUrl: "https://udbrsuite-releases.vercel.app/",
+    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
+    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
+    features: [
+      "🎮 60-120 FPS Direct Hardware GPU Screen Mirroring (~15ms)",
+      "💬 WhatsApp & Business Vault Exporter (HTML Reports & Media)",
+      "⚡ 120Hz Refresh Rate Lock & 0.5x UI Speed Booster",
+      "📦 1-Click Bloatware Cleaner & Multi-Format APK Sideload",
+      "🛡️ 100% Offline Local Architecture with Zero Telemetry"
+    ],
+    details: {
+      architecture: "Native Windows desktop toolkit built with C#/.NET 8.0, ADB platform tools, Scrcpy hardware acceleration pipeline, and local AES-256 encryption engine with zero cloud telemetry.",
+      modules: ["60-120 FPS GPU Mirroring Engine", "WhatsApp Vault & Chat Extractor", "Display 120Hz & Speed Booster", "DoD 5220.22-M Data Sanitizer", "Bloatware & Adware Cleaner", "ADB & Fastboot USB Bridge"]
+    }
+  },
+
+  {
+    name: "Gaming Firewall",
+    desc: "Ultra-lightweight Android per-app network firewall & BGMI 6-hour limit bypass companion. Isolates mobile games with 0.00ms proxy penalty, blocks background data hogs locally via TUN sinkhole, and provides a draggable floating HUD with live jitter & ping telemetry.",
+    icon: "🛡️",
+    glow: "cyan",
+    badge: "ANDROID APK",
+    type: "ANDROID APK",
+    githubUrl: "https://github.com/shaswatxd/gamingfirewall",
+    liveUrl: "https://gamingfirewallhai.vercel.app/",
+    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
+    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
+    features: [
+      "🛡️ 0.00ms Proxy Overhead & Native Direct Hardware UDP Bypass",
+      "⏱️ BGMI 6-Hour Daily Playtime Limit Bypass & Port Rule Presets",
+      "🚫 100% Local TUN Packet Sinkhole (Zero Cloud Telemetry)",
+      "⚡ Real-Time Jitter Alerting & Draggable In-Game Floating HUD",
+      "📱 Seamless In-App APK Auto-Updater & Zero Battery Drain"
+    ],
+    details: {
+      architecture: "Native Android firewall engine built with Kotlin & Jetpack Compose using Android's VpnService. Implements a local packet sinkhole (10.244.0.1) for background apps while allowing game sockets to bypass the tunnel for true zero-latency gaming and playtime restriction bypass.",
+      modules: ["Zero-Latency TUN Sinkhole Engine", "BGMI 6-Hour Bypass & Preset Rules", "Floating HUD & Jitter Calculator", "In-App APK Auto-Updater", "Per-App Socket Routing Controller", "Local VpnService Bridge"]
+    }
+  },
+
+  {
     name: "BirthdayMagic",
-    desc: "Interactive celebration & mystery surprise experience platform. Features a 3-step creator studio, 12 dynamic aesthetic themes, real voice note recording, candle blowing & cake slicing simulation, scratch-to-reveal coupons, and zero-database URL state encoding.",
+    desc: "Interactive celebration & mystery surprise experience platform. Features a 3-step creator studio, 12 aesthetic themes, real voice note recording, candle blowing & 3D cake slicing simulation.",
     icon: "🎁",
     glow: "magenta",
     badge: "SITE",
@@ -63,13 +110,10 @@ export const PROJECTS = [
     badgeClass: "bg-pink-500/10 text-pink-600 border-pink-500/20 dark:bg-pink-500/15 dark:text-pink-400",
     borderClass: "border-pink-500/30 hover:border-pink-500 dark:border-pink-500/20 dark:hover:border-pink-400",
     features: [
-      "✨ 4-Stage Interactive Story (Wax Seal, 3D Cake, Confetti, Keepsake Card)",
-      "🎂 Real Candle Blowing & Cake Slicing Physics Simulation",
-      "🎙️ In-Browser Voice Note Recording & Equalizer Player",
-      "🎟️ Interactive Scratch-to-Reveal Gift Coupon & Polaroid Gallery",
-      "🎭 Stealth Mystery Disguise Link Mode with Custom WhatsApp Previews",
-      "⏳ Midnight Countdown Lock & Secret Passcode Protection",
-      "🔒 100% Client-Side LZ-String State Compression (Zero Database)"
+      "✨ Interactive 3D Cake & Real Candle Blowing Physics",
+      "🎙️ In-Browser Voice Note Recording & Audio Equalizer",
+      "🎟️ Scratch-to-Reveal Gift Coupon & Polaroid Keepsake",
+      "🔒 100% Client-Side LZ-String State Compression"
     ],
     details: {
       architecture: "100% Client-side interactive canvas & animation pipeline. Encodes complete multimedia state, voice recordings, and customized settings into URL hashes using LZ-String compression with html2canvas keepsake generation.",
@@ -119,31 +163,6 @@ export const PROJECTS = [
     details: {
       architecture: "Next.js app with fully client-side bill generation. All processing happens in the browser — no server uploads. Supports custom logos, digital signatures, and multiple template categories with live preview.",
       modules: ["Template Engine & Category System", "PDF & PNG Export Pipeline", "Saved Drafts Manager", "Search & Filter Controller"]
-    }
-  },
-
-  {
-    name: "UDBRS",
-    desc: "Universal Device Backup & Recovery Suite for Windows. Ultra-low latency 60-120 FPS hardware screen mirroring, full WhatsApp Vault chat exporter with media & PDF reports, 1-click bloatware remover, 120Hz & 0.5x speed booster, and DoD 5220.22-M military trade-in data sanitizer.",
-    icon: "⚡",
-    glow: "cyan",
-    badge: "APP",
-    type: "DESKTOP",
-    githubUrl: "https://github.com/shaswatxd/udbrsuite-releases",
-    liveUrl: "https://udbrsuite-releases.vercel.app/",
-    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
-    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
-    features: [
-      "🎮 60-120 FPS Direct Hardware GPU Screen Mirroring (~15ms)",
-      "💬 WhatsApp & Business Vault Exporter (HTML Reports & Media)",
-      "⚡ 120Hz Refresh Rate Lock & 0.5x System UI Speed Booster",
-      "📦 1-Click Bloatware Cleaner & Multi-Format APK Sideload",
-      "🔒 Military Trade-In Data Sanitizer (DoD 5220.22-M & NIST SP 800-88)",
-      "🛡️ 100% Offline Local Architecture with Zero Telemetry"
-    ],
-    details: {
-      architecture: "Native Windows desktop toolkit built with C#/.NET 8.0, ADB platform tools, Scrcpy hardware acceleration pipeline, and local AES-256 encryption engine with zero cloud telemetry.",
-      modules: ["60-120 FPS GPU Mirroring Engine", "WhatsApp Vault & Chat Extractor", "Display 120Hz & Speed Booster", "DoD 5220.22-M Data Sanitizer", "Bloatware & Adware Cleaner", "ADB & Fastboot USB Bridge"]
     }
   },
 
