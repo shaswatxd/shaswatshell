@@ -73,7 +73,7 @@ function triggerRipple(e) {
 import { PROJECTS } from '../data/projects';
 
 const FEATURED_PROJECTS = PROJECTS.filter((p) =>
-  ["NovaDL", "We Plays", "UDBR Suite", "Gaming Firewall", "BirthdayMagic", "OmniDownloader", "Bill Generator"].includes(p.name)
+  ["NovaDL", "We Plays", "UDBR Suite", "BirthdayMagic", "OmniDownloader", "Bill Generator"].includes(p.name)
 );
 
 const Hero = React.memo(function Hero() {

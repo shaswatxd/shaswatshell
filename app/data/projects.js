@@ -74,29 +74,6 @@ export const PROJECTS = [
     }
   },
 
-  {
-    name: "Gaming Firewall",
-    desc: "Ultra-lightweight Android per-app network firewall & BGMI 6-hour limit bypass companion. Isolates mobile games with 0.00ms proxy penalty, blocks background data hogs locally via TUN sinkhole, and provides a draggable floating HUD with live jitter & ping telemetry.",
-    icon: "🛡️",
-    glow: "cyan",
-    badge: "ANDROID APK",
-    type: "ANDROID APK",
-    githubUrl: "https://github.com/shaswatxd/gamingfirewall",
-    liveUrl: "https://gamingfirewallhai.vercel.app/",
-    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
-    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
-    features: [
-      "🛡️ 0.00ms Proxy Overhead & Native Direct Hardware UDP Bypass",
-      "⏱️ BGMI 6-Hour Daily Playtime Limit Bypass & Port Rule Presets",
-      "🚫 100% Local TUN Packet Sinkhole (Zero Cloud Telemetry)",
-      "⚡ Real-Time Jitter Alerting & Draggable In-Game Floating HUD",
-      "📱 Seamless In-App APK Auto-Updater & Zero Battery Drain"
-    ],
-    details: {
-      architecture: "Native Android firewall engine built with Kotlin & Jetpack Compose using Android's VpnService. Implements a local packet sinkhole (10.244.0.1) for background apps while allowing game sockets to bypass the tunnel for true zero-latency gaming and playtime restriction bypass.",
-      modules: ["Zero-Latency TUN Sinkhole Engine", "BGMI 6-Hour Bypass & Preset Rules", "Floating HUD & Jitter Calculator", "In-App APK Auto-Updater", "Per-App Socket Routing Controller", "Local VpnService Bridge"]
-    }
-  },
 
   {
     name: "BirthdayMagic",
