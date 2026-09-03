@@ -22,12 +22,12 @@ const StatsStrip = React.memo(function StatsStrip() {
     return () => observer.disconnect();
   }, []);
 
-  const projectsCount = useCountUp(3, 1400, inView);
+  const projectsCount = useCountUp(8, 1400, inView);
   const techsCount = useCountUp(16, 1600, inView);
   const commitsCount = useCountUp(1000, 2000, inView);
 
   const stats = [
-    { value: projectsCount, suffix: "+", label: "Projects Shipped" },
+    { value: projectsCount, suffix: "+", label: "Shipped Builds" },
     { value: techsCount, suffix: "+", label: "Technologies" },
     { value: commitsCount, suffix: "+", label: "Commits Logged" },
     { value: "100", suffix: "%", label: "Open Source" },

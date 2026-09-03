@@ -32,7 +32,8 @@ class SoundFX {
       localStorage.setItem('sound_enabled', (!this.muted).toString());
     } catch {}
     if (!this.muted) {
-      this.playBeep(600, 0.05, 'sine');
+      this.initCtx();
+      this.playSuccess();
     }
     return !this.muted;
   }
@@ -41,7 +42,7 @@ class SoundFX {
     return this.muted;
   }
 
-  playBeep(freq = 440, duration = 0.05, type = 'sine', gainVal = 0.03) {
+  playBeep(freq = 440, duration = 0.05, type = 'sine', gainVal = 0.08) {
     if (this.muted) return;
     try {
       this.initCtx();
@@ -65,31 +66,31 @@ class SoundFX {
   }
 
   playClick() {
-    this.playBeep(800, 0.04, 'triangle', 0.04);
+    this.playBeep(720, 0.05, 'triangle', 0.1);
   }
 
   playHover() {
-    this.playBeep(320, 0.03, 'sine', 0.015);
+    this.playBeep(420, 0.04, 'sine', 0.04);
   }
 
   playKeypress() {
-    const freqs = [400, 450, 480, 520, 560];
+    const freqs = [420, 480, 520, 580, 640];
     const randomFreq = freqs[Math.floor(Math.random() * freqs.length)];
-    this.playBeep(randomFreq, 0.03, 'sine', 0.02);
+    this.playBeep(randomFreq, 0.04, 'sine', 0.08);
   }
 
   playSuccess() {
     if (this.muted) return;
-    this.playBeep(523.25, 0.08, 'sine', 0.03); // C5
-    setTimeout(() => this.playBeep(659.25, 0.08, 'sine', 0.03), 80); // E5
-    setTimeout(() => this.playBeep(783.99, 0.12, 'sine', 0.03), 160); // G5
+    this.playBeep(523.25, 0.09, 'sine', 0.1); // C5
+    setTimeout(() => this.playBeep(659.25, 0.09, 'sine', 0.1), 90); // E5
+    setTimeout(() => this.playBeep(783.99, 0.14, 'sine', 0.1), 180); // G5
   }
 
   playMatrix() {
     if (this.muted) return;
     for (let i = 0; i < 8; i++) {
       setTimeout(() => {
-        this.playBeep(300 + i * 120, 0.05, 'sawtooth', 0.02);
+        this.playBeep(300 + i * 120, 0.05, 'sawtooth', 0.06);
       }, i * 60);
     }
   }

@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
+import HeroEngineVisualizer from './HeroEngineVisualizer';
 
 // Magnetic Wrapper for Interactive Buttons
 function MagneticButton({ children }) {
@@ -100,79 +101,87 @@ const Hero = React.memo(function Hero() {
   return (
     <motion.header
       id="top"
-      className="relative px-6 lg:px-16 pt-6 sm:pt-8 pb-10 sm:pb-12 max-w-[1440px] mx-auto overflow-hidden flex flex-col justify-between min-h-[82vh] sm:min-h-[calc(100vh-80px)]"
+      className="relative px-5 sm:px-6 lg:px-16 pt-4 sm:pt-8 pb-6 sm:pb-12 max-w-[1440px] mx-auto overflow-hidden flex flex-col justify-between min-h-[auto] sm:min-h-[calc(100vh-80px)]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <div className="w-full">
-        {/* Typography & CTAs Layer */}
-        <div className="max-w-3xl">
-          {/* Live Developer Status Pill */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#0a0a0a]/10 dark:border-white/15 bg-black/[0.03] dark:bg-white/[0.04] mb-4 sm:mb-4 text-xs font-mono select-none">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span className="text-[#444] dark:text-[#ccc]">
-              India • <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Available for Work</span>
-            </span>
+        {/* Top Split: Typography on Left, 3D WebGL Holographic Core on Right */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Typography & CTAs Layer */}
+          <div className="lg:col-span-7">
+            {/* Live Developer Status Pill */}
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-[#0a0a0a]/10 dark:border-white/15 bg-black/[0.03] dark:bg-white/[0.04] mb-3 sm:mb-4 text-[11px] sm:text-xs font-mono select-none">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span className="text-[#444] dark:text-[#ccc]">
+                India • <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Available for Work</span>
+              </span>
+            </div>
+
+            {/* Main Heading with Authentic Design Engineer Tone */}
+            <h1 className="font-semibold tracking-tight leading-[1.05] text-3xl sm:text-5xl lg:text-[68px] text-[#0a0a0a] dark:text-[#f2f2f2] select-none">
+              <div className="block py-0.5">
+                Tools, Systems &amp;
+              </div>
+              <div className="block py-0.5">
+                Experiments That
+              </div>
+              <div className="block py-0.5 text-cyan">
+                Actually Ship.
+              </div>
+            </h1>
+
+            {/* Subtext description with authentic builder voice */}
+            <motion.p
+              className="mt-2.5 sm:mt-4 max-w-xl text-xs sm:text-base text-[#555] dark:text-[#aaa] leading-relaxed"
+              variants={itemVariants}
+            >
+              I build fast desktop apps, automated download engines, and client-side web tools. No corporate fluff — just clean code, real users, and high-performance craft.
+            </motion.p>
+
+            {/* CTA Buttons with Magnetic wraps and click ripples */}
+            <motion.div
+              className="mt-3.5 sm:mt-6 flex flex-row flex-wrap items-center gap-2.5 sm:gap-4"
+              variants={itemVariants}
+            >
+              <MagneticButton>
+                <a
+                  href="#projects"
+                  onClick={triggerRipple}
+                  className="ripple-container btn-primary inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white rounded-lg shadow-lg shadow-cyan/10 hover:shadow-cyan/25 transition-all"
+                >
+                  Explore All Projects
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </a>
+              </MagneticButton>
+
+              <MagneticButton>
+                <a
+                  href="#contact"
+                  onClick={triggerRipple}
+                  className="ripple-container btn-outline inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-medium text-xs uppercase tracking-wider text-[#0a0a0a] dark:text-white rounded-lg"
+                >
+                  Get In Touch
+                </a>
+              </MagneticButton>
+            </motion.div>
           </div>
 
-          {/* Main Heading with Authentic Design Engineer Tone */}
-          <h1 className="font-semibold tracking-tight leading-[1.04] text-4xl sm:text-5xl lg:text-[72px] text-[#0a0a0a] dark:text-[#f2f2f2] select-none">
-            <div className="block py-0.5">
-              Tools, Systems &amp;
-            </div>
-            <div className="block py-0.5">
-              Experiments That
-            </div>
-            <div className="block py-0.5 text-cyan">
-              Actually Ship.
-            </div>
-          </h1>
-
-          {/* Subtext description with authentic builder voice */}
-          <motion.p
-            className="mt-3.5 sm:mt-4 max-w-xl text-sm sm:text-base text-[#555] dark:text-[#aaa] leading-relaxed"
-            variants={itemVariants}
-          >
-            I build fast desktop apps, automated download engines, and client-side web tools. No corporate fluff — just clean code, real users, and high-performance craft.
-          </motion.p>
-
-          {/* CTA Buttons with Magnetic wraps and click ripples */}
-          <motion.div
-            className="mt-5 sm:mt-6 flex flex-row flex-wrap items-center gap-3 sm:gap-4"
-            variants={itemVariants}
-          >
-            <MagneticButton>
-              <a
-                href="#projects"
-                onClick={triggerRipple}
-                className="ripple-container btn-primary inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white rounded-lg shadow-lg shadow-cyan/10 hover:shadow-cyan/25 transition-all"
-              >
-                Explore All Projects
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </a>
-            </MagneticButton>
-
-            <MagneticButton>
-              <a
-                href="#contact"
-                onClick={triggerRipple}
-                className="ripple-container btn-outline inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-medium text-xs uppercase tracking-wider text-[#0a0a0a] dark:text-white rounded-lg"
-              >
-                Get In Touch
-              </a>
-            </MagneticButton>
+          {/* Right Column: Desktop Only (Hidden on Android & mobile screens to keep mobile view clean & snappy) */}
+          <motion.div className="hidden lg:block lg:col-span-5 w-full" variants={itemVariants}>
+            <HeroEngineVisualizer />
           </motion.div>
         </div>
 
         {/* ─── Instant Project Quick-Dock (Continuous Infinite Marquee Ribbon) ─── */}
         <motion.div 
-          className="mt-8 sm:mt-10 pt-5 sm:pt-6 border-t border-[#e8e8e8] dark:border-white/10 w-full"
+          className="mt-4 sm:mt-10 pt-3 sm:pt-6 border-t border-[#e8e8e8] dark:border-white/10 w-full"
           variants={itemVariants}
         >
           <div className="flex items-center justify-between mb-3">
@@ -205,7 +214,7 @@ const Hero = React.memo(function Hero() {
                     href={p.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group/card relative flex-shrink-0 w-[260px] sm:w-[285px] p-3.5 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[136px] sm:min-h-[142px] shadow-sm`}
+                    className={`group/card relative flex-shrink-0 w-[240px] sm:w-[285px] p-3 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[126px] sm:min-h-[142px] shadow-sm`}
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -241,7 +250,7 @@ const Hero = React.memo(function Hero() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={-1}
-                    className={`group/card relative flex-shrink-0 w-[260px] sm:w-[285px] p-3.5 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[136px] sm:min-h-[142px] shadow-sm`}
+                    className={`group/card relative flex-shrink-0 w-[240px] sm:w-[285px] p-3 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[126px] sm:min-h-[142px] shadow-sm`}
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-1.5">

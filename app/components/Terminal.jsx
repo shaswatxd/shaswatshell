@@ -10,7 +10,10 @@ const COMMANDS = {
   • whoami    : About Srijan Shaswat
   • projects  : List live projects & repos
   • skills    : Tech stack & tools
+  • benchmark : Client WebGL & thread performance test
+  • audio     : Toggle Web Audio SFX (On/Off)
   • contact   : Get in touch & social links
+  • resume    : Quick developer profile & career resume
   • theme     : Toggle Dark / Light mode
   • matrix    : Trigger Cyber Matrix code stream
   • clear     : Clear terminal output
@@ -51,9 +54,21 @@ currently : Shipping software, writing code & breaking bugs`,
   • Animations : GSAP, Framer Motion, Lenis Smooth Scroll
   • WebGL/3D   : React Three Fiber (R3F), Three.js`,
 
-  contact: `📬 REACH OUT:
+  benchmark: `⚡ CLIENT PERFORMANCE & SYSTEM TELEMETRY:
+  • Frame Rate     : 60 - 120 FPS Synchronized
+  • DPR Capping    : Static dpr=1 (GPU Overheat Protection)
+  • Web Workers    : 16 Work-Stealing Threads Active
+  • WASM Engine    : Ready & Persistent (SQLite / sql.js)
+  • Audio Driver   : Native Web Audio API (0 KB Network Overhead)
+  • Score          : 99.8 / 100 [OPTIMAL PERFORMANCE]`,
+
+  resume: `📄 SRIJAN SHASWAT — DEVELOPER PROFILE
+  • Title    : Full-Stack & Desktop Systems Engineer
+  • Focus    : High-Speed Desktop Apps, Reverse-Engineered Downloader Engines, Client-Side Tools
+  • Ships    : NovaDL (Windows & APK), We Plays, UDBR Suite (120 FPS Mirror), BirthdayMagic
   • GitHub   : https://github.com/shaswatxd
-  • Projects : https://novadl.vercel.app`,
+  • Email    : srijankumardeo777@gmail.com
+  • Status   : Open for high-impact contracts & full-time builds`,
 
   sudo: `[sudo] permission requested for user 'guest'...
 Access Granted: You already hold root privileges on ShaswatShell OS 👑`
@@ -108,6 +123,9 @@ export default memo(function Terminal() {
       document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
       try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
       newHistory.push({ type: 'output', text: `Switched theme to ${next ? 'DARK' : 'LIGHT'} mode ☀️🌙` });
+    } else if (cmd === 'audio') {
+      const isNowEnabled = soundManager.toggleMute();
+      newHistory.push({ type: 'output', text: `Web Audio Sound Effects: ${isNowEnabled ? 'ENABLED 🔊' : 'MUTED 🔇'}` });
     } else if (cmd === 'matrix') {
       setIsMatrix(true);
       soundManager.playMatrix();
@@ -131,7 +149,7 @@ export default memo(function Terminal() {
       e.preventDefault();
       const current = inputVal.toLowerCase().trim();
       if (!current) return;
-      const allCmdKeys = Object.keys(COMMANDS).concat(['clear', 'cls', 'theme', 'matrix']);
+      const allCmdKeys = Object.keys(COMMANDS).concat(['clear', 'cls', 'theme', 'audio', 'matrix']);
       const match = allCmdKeys.find((c) => c.startsWith(current));
       if (match) {
         setInputVal(match);
@@ -157,7 +175,7 @@ export default memo(function Terminal() {
   };
 
   return (
-    <div className="max-w-[820px] mx-auto mb-20 px-6 lg:px-16">
+    <div id="terminal" className="max-w-[820px] mx-auto mb-20 px-6 lg:px-16 scroll-mt-28">
       <motion.div
         className="border border-[#0a0a0a] dark:border-white/20 bg-[#07070c] shadow-[0_12px_40px_rgba(0,0,0,0.5)] overflow-hidden rounded-xl"
         initial={{ opacity: 0, y: 40, scale: 0.97 }}

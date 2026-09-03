@@ -13,7 +13,9 @@ const ACTIONS = [
     icon: '🚀',
     category: 'Navigation',
     action: () => {
-      document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById('projects');
+      if (window.__lenis && el) window.__lenis.scrollTo(el, { offset: -90, duration: 1.1 });
+      else el?.scrollIntoView({ behavior: 'smooth' });
     }
   },
   {
@@ -23,7 +25,9 @@ const ACTIONS = [
     icon: '⚡',
     category: 'Navigation',
     action: () => {
-      document.getElementById('stack')?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById('stack');
+      if (window.__lenis && el) window.__lenis.scrollTo(el, { offset: -90, duration: 1.1 });
+      else el?.scrollIntoView({ behavior: 'smooth' });
     }
   },
   {
@@ -33,7 +37,9 @@ const ACTIONS = [
     icon: '💻',
     category: 'Navigation',
     action: () => {
-      document.getElementById('terminal')?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById('terminal');
+      if (window.__lenis && el) window.__lenis.scrollTo(el, { offset: -90, duration: 1.1 });
+      else el?.scrollIntoView({ behavior: 'smooth' });
     }
   },
   {
@@ -43,7 +49,9 @@ const ACTIONS = [
     icon: '📬',
     category: 'Navigation',
     action: () => {
-      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      const el = document.getElementById('contact');
+      if (window.__lenis && el) window.__lenis.scrollTo(el, { offset: -90, duration: 1.1 });
+      else el?.scrollIntoView({ behavior: 'smooth' });
     }
   },
   {
