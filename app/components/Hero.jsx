@@ -152,12 +152,14 @@ const Hero = React.memo(function Hero() {
                 <a
                   href="#projects"
                   onClick={triggerRipple}
-                  className="ripple-container btn-primary inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white rounded-lg shadow-lg shadow-cyan/10 hover:shadow-cyan/25 transition-all"
+                  className="ripple-container btn-shimmer inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white shadow-lg shadow-cyan/15 hover:shadow-cyan/30 transition-all"
                 >
-                  Explore All Projects
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                  </svg>
+                  <span className="flex items-center gap-2">
+                    Explore All Projects
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                  </span>
                 </a>
               </MagneticButton>
 

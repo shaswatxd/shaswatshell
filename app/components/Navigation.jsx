@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
-import AudioToggle from './AudioToggle';
 import ScrollProgress from './ScrollProgress';
 import { soundManager } from '../utils/SoundManager';
 
@@ -223,9 +222,6 @@ const Navigation = React.memo(function Navigation({ onOpenSearch }) {
               Ctrl K
             </span>
           </button>
-
-          {/* Audio SFX Toggle */}
-          <AudioToggle />
 
           {/* Theme Toggle */}
           <ThemeToggle className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border border-[#0a0a0a]/20 dark:border-white/25 hover:border-cyan hover:text-cyan transition-all duration-200 shadow-sm" />

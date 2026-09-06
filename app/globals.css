@@ -281,6 +281,52 @@
   color: #0a0a0a;
   transform: translateY(-1px);
 }
+
+@keyframes border-beam {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+.btn-shimmer::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent 0 300deg, #00c2d1 360deg);
+  animation: border-beam 3.8s linear infinite;
+  z-index: 1;
+}
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  background: #0a0a0a;
+  border-radius: 7px;
+  z-index: 2;
+  transition: background 0.25s ease;
+}
+.dark .btn-shimmer::after {
+  background: #0c0d12;
+}
+.btn-shimmer:hover::after {
+  background: #14161f;
+}
+.btn-shimmer:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 25px rgba(0, 194, 209, 0.3);
+}
+.btn-shimmer > * {
+  position: relative;
+  z-index: 3;
+}
 .dark .btn-primary {
   background: #f2f2f2;
   color: #0a0a0a;

@@ -157,8 +157,9 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
   const rafRef = useRef(null);
 
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Mousemove handler for 3D card tilt & spotlight
+  // Mousemove handler for 3D card tilt & 21st.dev spotlight
   const handleMouseMove = (e) => {
     const card = cardRef.current;
     if (!card) return;
@@ -166,13 +167,14 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
     
-    // Calculate tilt angles (-10deg to +10deg)
+    // Calculate tilt angles (-8deg to +8deg)
     const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -8;
     const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 8;
 
     if (rafRef.current) cancelAnimationFrame(rafRef.current);
     rafRef.current = requestAnimationFrame(() => {
       setTilt({ x: rotateX, y: rotateY });
+      setMousePos({ x, y });
       card.style.setProperty("--mouse-x", `${(x / rect.width) * 100}%`);
       card.style.setProperty("--mouse-y", `${(y / rect.height) * 100}%`);
     });
@@ -201,9 +203,28 @@ const Card = memo(function Card({ project, idx, onOpenDetails, borderClasses }) 
       viewport={{ once: true, margin: '-50px' }}
       transition={{ type: "spring", stiffness: 75, damping: 14, delay: idx * 0.06 }}
     >
+      {/* 21st.dev Spotlight Radial Glow */}
+      <div 
+        className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-0"
+        style={{
+          background: `radial-gradient(380px circle at ${mousePos.x}px ${mousePos.y}px, ${col}22, transparent 80%)`,
+        }}
+      />
+
+      {/* 21st.dev Cursor-Following Border Spotlight (Linear / Aceternity Beam) */}
+      <div
+        className="pointer-events-none absolute inset-0 rounded-2xl border border-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20"
+        style={{
+          background: `radial-gradient(260px circle at ${mousePos.x}px ${mousePos.y}px, ${col}aa, transparent 70%) border-box`,
+          WebkitMask: 'linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0)',
+          WebkitMaskComposite: 'xor',
+          maskComposite: 'exclude',
+        }}
+      />
+
       {/* Animated Top Border Beam on Hover */}
       <div 
-        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
         style={{ background: `linear-gradient(90deg, transparent, ${col}, transparent)` }}
       />
 
@@ -300,22 +321,32 @@ export default memo(function Projects() {
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16 pb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
         {/* Category Pill Tabs */}
         <div className="flex items-center gap-2 overflow-x-auto scrollbar-none py-1">
-          {filters.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => {
-                soundManager?.playClick?.();
-                setActiveFilter(tab.id);
-              }}
-              className={`px-4 py-2 text-xs font-mono tracking-wider uppercase border rounded-md transition-all duration-200 whitespace-nowrap ${
-                activeFilter === tab.id
-                  ? 'border-cyan bg-cyan/10 text-cyan font-bold shadow-[0_0_12px_rgba(0,194,209,0.15)]'
-                  : 'border-[#e8e8e8] dark:border-white/15 text-[#666] dark:text-[#999] hover:border-[#0a0a0a] dark:hover:border-white/40 hover:text-[#0a0a0a] dark:hover:text-[#f2f2f2]'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
+          {filters.map((tab) => {
+            const isActive = activeFilter === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => {
+                  soundManager?.playClick?.();
+                  setActiveFilter(tab.id);
+                }}
+                className={`relative px-4 py-2 text-xs font-mono tracking-wider uppercase rounded-md transition-colors duration-200 whitespace-nowrap border ${
+                  isActive
+                    ? 'border-cyan/40 text-cyan font-bold'
+                    : 'border-[#e8e8e8] dark:border-white/10 text-[#666] dark:text-[#999] hover:text-[#0a0a0a] dark:hover:text-[#f2f2f2]'
+                }`}
+              >
+                {isActive && (
+                  <motion.div
+                    layoutId="activeFilterPill"
+                    className="absolute inset-0 bg-cyan/10 dark:bg-cyan/15 rounded-md border border-cyan/50 shadow-[0_0_16px_rgba(0,194,209,0.2)]"
+                    transition={{ type: "spring", stiffness: 450, damping: 32 }}
+                  />
+                )}
+                <span className="relative z-10">{tab.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Live Search Input */}
