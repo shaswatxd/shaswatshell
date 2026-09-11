@@ -2,7 +2,6 @@
 
 import React, { useRef } from 'react';
 import { motion } from 'framer-motion';
-import HeroEngineVisualizer from './HeroEngineVisualizer';
 
 // Magnetic Wrapper for Interactive Buttons
 function MagneticButton({ children }) {
@@ -101,92 +100,73 @@ const Hero = React.memo(function Hero() {
   return (
     <motion.header
       id="top"
-      className="relative px-5 sm:px-6 lg:px-16 pt-4 sm:pt-8 pb-6 sm:pb-12 max-w-[1440px] mx-auto overflow-hidden flex flex-col justify-between min-h-[auto] sm:min-h-[calc(100vh-80px)]"
+      className="relative px-5 sm:px-6 lg:px-16 pt-2 sm:pt-4 pb-4 sm:pb-6 max-w-[1440px] mx-auto overflow-hidden flex flex-col justify-between min-h-[auto] lg:min-h-[calc(100vh-80px)]"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
-      <div className="w-full">
-        {/* Top Split: Typography on Left, 3D WebGL Holographic Core on Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          {/* Typography & CTAs Layer */}
-          <div className="lg:col-span-7">
-            {/* Live Developer Status Pill */}
-            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-[#0a0a0a]/10 dark:border-white/15 bg-black/[0.03] dark:bg-white/[0.04] mb-3 sm:mb-4 text-[11px] sm:text-xs font-mono select-none">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </span>
-              <span className="text-[#444] dark:text-[#ccc]">
-                India • <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Available for Work</span>
-              </span>
+      <div className="w-full flex flex-col justify-between flex-1">
+        {/* Typography & CTAs Layer — Clean, authentic, confident (Zero fake AI widgets) */}
+        <div className="max-w-4xl pt-1 sm:pt-3 pb-2 sm:pb-4">
+          {/* Main Heading with Authentic Design Engineer Tone */}
+          <h1 className="font-semibold tracking-tight leading-[1.03] text-4xl sm:text-5xl lg:text-[64px] xl:text-[70px] text-[#0a0a0a] dark:text-[#f2f2f2] select-none">
+            <div className="block py-0.5">
+              Tools, Systems &amp;
             </div>
+            <div className="block py-0.5">
+              Experiments That
+            </div>
+            <div className="block py-0.5 text-cyan">
+              Actually Ship.
+            </div>
+          </h1>
 
-            {/* Main Heading with Authentic Design Engineer Tone */}
-            <h1 className="font-semibold tracking-tight leading-[1.05] text-3xl sm:text-5xl lg:text-[68px] text-[#0a0a0a] dark:text-[#f2f2f2] select-none">
-              <div className="block py-0.5">
-                Tools, Systems &amp;
-              </div>
-              <div className="block py-0.5">
-                Experiments That
-              </div>
-              <div className="block py-0.5 text-cyan">
-                Actually Ship.
-              </div>
-            </h1>
+          {/* Subtext description with authentic builder voice */}
+          <motion.p
+            className="mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base text-[#555] dark:text-[#aaa] leading-relaxed"
+            variants={itemVariants}
+          >
+            I build fast desktop apps, automated download engines, and client-side web tools. No corporate fluff — just clean code, real users, and high-performance craft.
+          </motion.p>
 
-            {/* Subtext description with authentic builder voice */}
-            <motion.p
-              className="mt-2.5 sm:mt-4 max-w-xl text-xs sm:text-base text-[#555] dark:text-[#aaa] leading-relaxed"
-              variants={itemVariants}
-            >
-              I build fast desktop apps, automated download engines, and client-side web tools. No corporate fluff — just clean code, real users, and high-performance craft.
-            </motion.p>
+          {/* CTA Buttons with Magnetic wraps and click ripples */}
+          <motion.div
+            className="mt-4 sm:mt-6 flex flex-row flex-wrap items-center gap-3 sm:gap-4"
+            variants={itemVariants}
+          >
+            <MagneticButton>
+              <a
+                href="#projects"
+                onClick={triggerRipple}
+                className="ripple-container btn-shimmer inline-flex items-center gap-2 px-5 py-3 sm:px-6 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white shadow-lg shadow-cyan/15 hover:shadow-cyan/30 transition-all"
+              >
+                <span className="flex items-center gap-2">
+                  Explore All Projects
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                  </svg>
+                </span>
+              </a>
+            </MagneticButton>
 
-            {/* CTA Buttons with Magnetic wraps and click ripples */}
-            <motion.div
-              className="mt-3.5 sm:mt-6 flex flex-row flex-wrap items-center gap-2.5 sm:gap-4"
-              variants={itemVariants}
-            >
-              <MagneticButton>
-                <a
-                  href="#projects"
-                  onClick={triggerRipple}
-                  className="ripple-container btn-shimmer inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-semibold text-xs uppercase tracking-wider text-white shadow-lg shadow-cyan/15 hover:shadow-cyan/30 transition-all"
-                >
-                  <span className="flex items-center gap-2">
-                    Explore All Projects
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M5 12h14M12 5l7 7-7 7"/>
-                    </svg>
-                  </span>
-                </a>
-              </MagneticButton>
-
-              <MagneticButton>
-                <a
-                  href="#contact"
-                  onClick={triggerRipple}
-                  className="ripple-container btn-outline inline-flex items-center gap-2 px-6 py-3.5 sm:px-7 sm:py-3.5 font-medium text-xs uppercase tracking-wider text-[#0a0a0a] dark:text-white rounded-lg"
-                >
-                  Get In Touch
-                </a>
-              </MagneticButton>
-            </motion.div>
-          </div>
-
-          {/* Right Column: Desktop Only (Hidden on Android & mobile screens to keep mobile view clean & snappy) */}
-          <motion.div className="hidden lg:block lg:col-span-5 w-full" variants={itemVariants}>
-            <HeroEngineVisualizer />
+            <MagneticButton>
+              <a
+                href="#contact"
+                onClick={triggerRipple}
+                className="ripple-container btn-outline inline-flex items-center gap-2 px-5 py-3 sm:px-6 sm:py-3.5 font-medium text-xs uppercase tracking-wider text-[#0a0a0a] dark:text-white rounded-lg"
+              >
+                Get In Touch
+              </a>
+            </MagneticButton>
           </motion.div>
         </div>
 
         {/* ─── Instant Project Quick-Dock (Continuous Infinite Marquee Ribbon) ─── */}
         <motion.div 
-          className="mt-4 sm:mt-10 pt-3 sm:pt-6 border-t border-[#e8e8e8] dark:border-white/10 w-full"
+          className="mt-4 sm:mt-auto pt-3 sm:pt-4 border-t border-[#e8e8e8] dark:border-white/10 w-full"
           variants={itemVariants}
         >
-          <div className="flex items-center justify-between mb-3">
+          <div className="flex items-center justify-between mb-2 sm:mb-2.5">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
@@ -216,7 +196,7 @@ const Hero = React.memo(function Hero() {
                     href={p.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group/card relative flex-shrink-0 w-[240px] sm:w-[285px] p-3 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[126px] sm:min-h-[142px] shadow-sm`}
+                    className={`group/card relative flex-shrink-0 w-[230px] sm:w-[270px] p-3 sm:p-3.5 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[118px] sm:min-h-[130px] shadow-sm`}
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -235,7 +215,7 @@ const Hero = React.memo(function Hero() {
                       </p>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-cyan font-medium">
+                    <div className="mt-2 pt-1.5 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-cyan font-medium">
                       <span className="group-hover/card:underline">Launch Live</span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
                         <path d="M7 17L17 7M17 7H7M17 7V17"/>
@@ -252,7 +232,7 @@ const Hero = React.memo(function Hero() {
                     target="_blank"
                     rel="noopener noreferrer"
                     tabIndex={-1}
-                    className={`group/card relative flex-shrink-0 w-[240px] sm:w-[285px] p-3 sm:p-4 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[126px] sm:min-h-[142px] shadow-sm`}
+                    className={`group/card relative flex-shrink-0 w-[230px] sm:w-[270px] p-3 sm:p-3.5 rounded-xl border bg-white/95 dark:bg-[#111113] ${p.borderClass} transition-all duration-200 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between select-none min-h-[118px] sm:min-h-[130px] shadow-sm`}
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-1.5">
@@ -271,7 +251,7 @@ const Hero = React.memo(function Hero() {
                       </p>
                     </div>
 
-                    <div className="mt-2.5 pt-2 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-cyan font-medium">
+                    <div className="mt-2 pt-1.5 border-t border-black/5 dark:border-white/5 flex items-center justify-between text-[11px] font-mono text-cyan font-medium">
                       <span className="group-hover/card:underline">Launch Live</span>
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover/card:translate-x-0.5 group-hover/card:-translate-y-0.5">
                         <path d="M7 17L17 7M17 7H7M17 7V17"/>
