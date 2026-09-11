@@ -299,10 +299,11 @@ export default memo(function Projects() {
       proj.desc.toLowerCase().includes(searchQuery.toLowerCase());
 
     return matchesCategory && matchesSearch;
+  }).sort((a, b) => {
+    if (a.name === "NovaDL") return -1;
+    if (b.name === "NovaDL") return 1;
+    return 0;
   });
-
-  const novaDL = PROJECTS.find((p) => p.name === "NovaDL");
-  const otherProjects = filteredProjects.filter((p) => p.name !== "NovaDL" || activeFilter !== "ALL" || searchQuery);
 
   return (
     <>
@@ -369,111 +370,11 @@ export default memo(function Projects() {
         </div>
       </div>
 
-      {/* ── Asymmetric Bento Grid Showcase ── */}
+      {/* ── Project Index Grid (NovaDL is Card #1) ── */}
       <div className="max-w-[1440px] mx-auto px-6 lg:px-16 mb-12">
-        {/* NovaDL Flagship Bento Hero (Shown on All Works when not actively searching) */}
-        {activeFilter === "ALL" && !searchQuery && novaDL && (
-          <div className="mb-6 p-6 sm:p-8 rounded-2xl border border-violet/30 dark:border-violet/20 bg-gradient-to-br from-white via-white to-violet/[0.04] dark:from-[#111114] dark:via-[#111114] dark:to-violet/[0.06] shadow-sm relative overflow-hidden group">
-            {/* Top accent glow line */}
-            <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-violet to-transparent opacity-80" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-              {/* Left Details */}
-              <div className="lg:col-span-7">
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{novaDL.icon}</span>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-2xl text-[#0a0a0a] dark:text-[#f2f2f2]">{novaDL.name}</h3>
-                      <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-violet/15 text-violet border border-violet/30">
-                        FLAGSHIP APP
-                      </span>
-                    </div>
-                    <span className="font-mono text-[11px] text-[#777]">Windows Desktop &amp; Android APK</span>
-                  </div>
-                </div>
-
-                <p className="text-sm text-[#555] dark:text-[#aaa] leading-relaxed mb-6">
-                  {novaDL.desc}
-                </p>
-
-                {/* Feature Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {novaDL.features.slice(0, 4).map((f, i) => (
-                    <span key={i} className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-black/[0.04] dark:bg-white/[0.05] border border-black/5 dark:border-white/10 text-[#444] dark:text-[#ccc]">
-                      {f}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Direct Action Buttons */}
-                <div className="flex flex-wrap items-center gap-3">
-                  <a
-                    href={novaDL.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-lg bg-violet hover:bg-violet/90 text-white font-semibold text-xs uppercase tracking-wider transition-all shadow-md shadow-violet/20 flex items-center gap-2"
-                  >
-                    <span>Launch NovaDL</span>
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M7 17L17 7M17 7H7M17 7V17"/>
-                    </svg>
-                  </a>
-
-                  <button
-                    onClick={() => setActiveProject(novaDL)}
-                    className="px-4 py-2.5 rounded-lg border border-[#0a0a0a]/15 dark:border-white/15 hover:border-violet text-xs font-mono text-[#666] dark:text-[#aaa] hover:text-[#0a0a0a] dark:hover:text-white transition-colors cursor-pointer"
-                  >
-                    View System Specs →
-                  </button>
-                </div>
-              </div>
-
-              {/* Right Interactive Mock Engine Visualizer */}
-              <div className="lg:col-span-5 p-5 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.03] dark:bg-black/40 font-mono text-xs">
-                <div className="flex items-center justify-between pb-3 mb-3 border-b border-black/10 dark:border-white/10 text-[11px] text-[#777]">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span>WASM_WORKER_ENGINE</span>
-                  </span>
-                  <span>16 THREADS ACTIVE</span>
-                </div>
-
-                <div className="space-y-3 text-[11px]">
-                  <div>
-                    <div className="flex justify-between text-[#666] dark:text-[#aaa] mb-1">
-                      <span>Chunk Splitting (64MB blocks)</span>
-                      <span className="text-violet font-semibold">100%</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
-                      <div className="w-full h-full bg-violet rounded-full"></div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="flex justify-between text-[#666] dark:text-[#aaa] mb-1">
-                      <span>HLS Stream Demux &amp; Assembler</span>
-                      <span className="text-cyan font-semibold">Ready</span>
-                    </div>
-                    <div className="w-full h-1.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
-                      <div className="w-[85%] h-full bg-cyan rounded-full"></div>
-                    </div>
-                  </div>
-
-                  <div className="pt-2 text-[10px] text-[#777] dark:text-[#888] flex items-center justify-between">
-                    <span>SQLite WASM Persistence</span>
-                    <span className="text-emerald-500 font-bold">SYNCHRONIZED</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Regular Grid Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
           <AnimatePresence mode="popLayout">
-            {(activeFilter === "ALL" && !searchQuery ? otherProjects : filteredProjects).map((project, idx) => (
+            {filteredProjects.map((project, idx) => (
               <Card
                 key={project.name}
                 project={project}
