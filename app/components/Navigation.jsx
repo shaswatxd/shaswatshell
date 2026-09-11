@@ -197,32 +197,8 @@ const Navigation = React.memo(function Navigation({ onOpenSearch }) {
           ))}
         </div>
 
-        {/* Search Bar + Theme Toggle + GitHub Profile */}
+        {/* Theme Toggle + Mobile Menu + GitHub Profile */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Quick Command Launcher Button */}
-          <button
-            type="button"
-            onClick={() => {
-              soundManager?.playClick?.();
-              if (typeof onOpenSearch === 'function') {
-                onOpenSearch();
-              } else {
-                window.dispatchEvent(new CustomEvent('open-command-palette'));
-              }
-            }}
-            className="hidden sm:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#0a0a0a]/15 dark:border-white/20 bg-black/[0.04] dark:bg-white/[0.05] hover:bg-black/[0.08] dark:hover:bg-white/[0.1] text-xs font-mono text-[#555] dark:text-[#aaa] hover:text-[#0a0a0a] dark:hover:text-white transition-all cursor-pointer shadow-2xs"
-            title="Search projects (Ctrl + K)"
-          >
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="text-[#888] dark:text-[#999]">
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <span className="font-sans text-xs">Search</span>
-            <span className="ml-1 text-[10px] px-1.5 py-0.5 rounded bg-black/10 dark:bg-white/10 text-[#555] dark:text-[#bbb] font-mono leading-none">
-              Ctrl K
-            </span>
-          </button>
-
           {/* Theme Toggle */}
           <ThemeToggle className="rounded-full w-9 h-9 sm:w-10 sm:h-10 border border-[#0a0a0a]/20 dark:border-white/25 hover:border-cyan hover:text-cyan transition-all duration-200 shadow-sm" />
 
