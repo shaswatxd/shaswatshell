@@ -163,10 +163,10 @@ const Hero = React.memo(function Hero() {
 
         {/* ─── Instant Project Quick-Dock (Continuous Infinite Marquee Ribbon) ─── */}
         <motion.div 
-          className="mt-4 sm:mt-auto pt-3 sm:pt-4 border-t border-[#e8e8e8] dark:border-white/10 w-full"
+          className="mt-8 sm:mt-12 lg:mt-14 pt-4 sm:pt-6 border-t border-[#e8e8e8] dark:border-white/10 w-full"
           variants={itemVariants}
         >
-          <div className="flex items-center justify-between mb-2 sm:mb-2.5">
+          <div className="flex items-center justify-between mb-3 sm:mb-4">
             <div className="flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan opacity-75"></span>
