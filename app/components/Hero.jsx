@@ -131,7 +131,7 @@ const Hero = React.memo(function Hero() {
 
           {/* CTA Buttons with Magnetic wraps and click ripples */}
           <motion.div
-            className="mt-4 sm:mt-6 flex flex-row flex-wrap items-center gap-3 sm:gap-4"
+            className="mt-7 sm:mt-9 lg:mt-10 flex flex-row flex-wrap items-center gap-3 sm:gap-4"
             variants={itemVariants}
           >
             <MagneticButton>
