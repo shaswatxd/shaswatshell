@@ -176,10 +176,6 @@ const Hero = React.memo(function Hero() {
                 Featured Live Ships
               </span>
             </div>
-
-            <span className="font-mono text-[11px] text-[#888] dark:text-[#777]">
-              Live Stream ⚡
-            </span>
           </div>
 
           {/* Endless Smooth Gliding Project Marquee */}

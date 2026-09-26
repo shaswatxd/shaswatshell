@@ -70,13 +70,6 @@ const Footer = React.memo(function Footer() {
 
         {/* Contact Links & Back to Top */}
         <div className="flex flex-col items-center md:items-end gap-2.5">
-          <a
-            href="mailto:srijankumardeo777@gmail.com"
-            className="font-mono text-[10px] text-[#666] dark:text-[#999] hover:text-cyan transition-colors duration-200"
-          >
-            srijankumardeo777@gmail.com
-          </a>
-
           <button
             onClick={handleScrollTop}
             className="font-mono text-[9px] text-[#666] dark:text-[#999] hover:text-[#0a0a0a] dark:hover:text-[#f2f2f2] transition-colors duration-200 flex items-center gap-1 group cursor-pointer"
