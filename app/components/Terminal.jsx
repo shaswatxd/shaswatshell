@@ -42,10 +42,9 @@ currently : Shipping software, writing code & breaking bugs`,
   2. We Plays        : Desktop music player with in-app audio downloader, custom playlists & lyrics
   3. UDBR Suite      : Universal Android & iOS backup suite, 120 FPS screen mirror & WhatsApp vault
   4. BirthdayMagic   : Interactive 3D celebration studio with cake slicing & candle physics
-  5. OmniDownloader  : All-in-one multi-engine media downloader & creator studio
-  6. Bill Generator  : Free bill & receipt generator with 30+ templates
-  7. JustPDFCraft    : 100% Client-Side PDF Utilities Toolkit
-  8. Resume Builder  : Professional Resume Builder with 30 Templates`,
+  5. Bill Generator  : Free bill & receipt generator with 30+ templates
+  6. JustPDFCraft    : 100% Client-Side PDF Utilities Toolkit
+  7. Resume Builder  : Professional Resume Builder with 30 Templates`,
 
   skills: `🛠️ CORE TECH STACK & ENGINE:
   • Languages  : JavaScript (ESNext), TypeScript, HTML5, CSS3, C++

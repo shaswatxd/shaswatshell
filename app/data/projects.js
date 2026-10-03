@@ -98,27 +98,6 @@ export const PROJECTS = [
     }
   },
 
-  {
-    name: "OmniDownloader",
-    desc: "High-speed multi-engine all-in-one media downloader & creator studio for Facebook, Instagram, and Twitter/X with zero watermarks & auto-fallback extraction.",
-    icon: "⚡",
-    glow: "cyan",
-    badge: "SITE",
-    type: "WEB APP",
-    githubUrl: "https://github.com/shaswatxd/omnidownloader",
-    liveUrl: "https://omnidownloader-one.vercel.app/",
-    badgeClass: "bg-cyan/10 text-cyan border-cyan/20 dark:bg-cyan/15 dark:text-cyan",
-    borderClass: "border-cyan/30 hover:border-cyan dark:border-cyan/20 dark:hover:border-cyan/80",
-    features: [
-      "⚡ Auto-Fallback Multi-Engine Stream Extraction",
-      "🎥 No Watermark HD Downloads (Facebook, Instagram, Twitter/X)",
-      "🔒 100% Free Client-Side & Server Sandbox Routing"
-    ],
-    details: {
-      architecture: "High-speed multi-engine extraction pipeline with dynamic failover routing for Facebook, Instagram, and Twitter/X, featuring zero-watermark processing and client-side download history.",
-      modules: ["Auto-Fallback Extraction Engine", "Facebook Video & Reel Parser", "Instagram Reel & Story Engine", "Twitter/X Media Extractor", "Client Download History Manager", "Interactive Creative Studio"]
-    }
-  },
 
   {
     name: "Bill Generator",
