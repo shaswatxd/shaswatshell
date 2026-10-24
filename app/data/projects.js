@@ -83,7 +83,7 @@ export const PROJECTS = [
     badge: "SITE",
     type: "WEB APP",
     githubUrl: "https://github.com/shaswatxd/special-surprise-box",
-    liveUrl: "https://special-surprise-box.vercel.app/",
+    liveUrl: "https://birthday-magic-chi.vercel.app",
     badgeClass: "bg-pink-500/10 text-pink-600 border-pink-500/20 dark:bg-pink-500/15 dark:text-pink-400",
     borderClass: "border-pink-500/30 hover:border-pink-500 dark:border-pink-500/20 dark:hover:border-pink-400",
     features: [
